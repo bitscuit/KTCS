@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`member_num`,`vin`,`comment_time`),
   KEY `FK_comment_car` (`vin`),
+  KEY `FK_comment_member` (`member_num`),
   CONSTRAINT `FK_comment_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`),
   CONSTRAINT `FK_comment_member` FOREIGN KEY (`member_num`) REFERENCES `member` (`member_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
