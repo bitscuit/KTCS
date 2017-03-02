@@ -49,28 +49,12 @@ CREATE TABLE IF NOT EXISTS `car_maintenance_history` (
   CONSTRAINT `FK_car_maintenance_history_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.car_maintenance_history: ~0 rows (approximately)
+-- Dumping data for table 332.car_maintenance_history: ~2 rows (approximately)
 /*!40000 ALTER TABLE `car_maintenance_history` DISABLE KEYS */;
+INSERT INTO `car_maintenance_history` (`vin`, `maintenance_date`, `odometer_reading`, `maintenance_type`, `description`, `maintenance_time`) VALUES
+	('736hfyst618hye76t', '2017-02-02', 2789, 'Scheduled', 'Oil Change', '12:16:45'),
+	('123gh45rt7y6534rw', '2017-02-17', 20176, 'Repair', 'Brakes', '09:45:19');
 /*!40000 ALTER TABLE `car_maintenance_history` ENABLE KEYS */;
-
--- Dumping structure for table 332.car_rental_history
-CREATE TABLE IF NOT EXISTS `car_rental_history` (
-  `member_num` int(20) NOT NULL,
-  `pick-up_odometer_reading` int(20) NOT NULL,
-  `drop-off_odometer_reader` int(20) NOT NULL,
-  `status` enum('Normal','Damaged','Not Running') NOT NULL,
-  `vin` varchar(20) NOT NULL,
-  `rent_date` date NOT NULL,
-  `pick-up_time` time NOT NULL,
-  `drop-off_time` time NOT NULL,
-  PRIMARY KEY (`member_num`,`vin`,`rent_date`),
-  KEY `FK_car_rental_history_car` (`vin`),
-  CONSTRAINT `FK_car_rental_history_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Dumping data for table 332.car_rental_history: ~0 rows (approximately)
-/*!40000 ALTER TABLE `car_rental_history` DISABLE KEYS */;
-/*!40000 ALTER TABLE `car_rental_history` ENABLE KEYS */;
 
 -- Dumping structure for table 332.comment
 CREATE TABLE IF NOT EXISTS `comment` (
@@ -102,34 +86,17 @@ CREATE TABLE IF NOT EXISTS `member` (
   `license_num` varchar(20) NOT NULL,
   `annual_mem_fee` decimal(15,2) NOT NULL,
   `role` enum('User','Admin') NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL,
   PRIMARY KEY (`member_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table 332.member: ~2 rows (approximately)
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` (`member_num`, `f_name`, `l_name`, `phone_num`, `email`, `license_num`, `annual_mem_fee`, `role`) VALUES
-	(123456, 'Mitch', 'Mulder', '905-756-73', NULL, 'L4762-73672-37262', 100.25, 'User'),
-	(654321, 'Michael', 'Tanel', '905-362-37', 'michael.tanel@queensu.ca', 'M6352-72653-74653', 100.25, 'Admin');
+INSERT INTO `member` (`member_num`, `f_name`, `l_name`, `phone_num`, `email`, `license_num`, `annual_mem_fee`, `role`, `username`, `password`) VALUES
+	(123456, 'Mitch', 'Mulder', '905-756-73', NULL, 'L4762-73672-37262', 100.25, 'User', 'MitchMulder', 'rVs7ucMHad1i8V'),
+	(654321, 'Michael', 'Tanel', '905-362-37', 'michael.tanel@queensu.ca', 'M6352-72653-74653', 100.25, 'Admin', 'MichaelTanel', 'uThQkusSKCtym4');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
-
--- Dumping structure for table 332.member_rental_history
-CREATE TABLE IF NOT EXISTS `member_rental_history` (
-  `vin` varchar(20) NOT NULL,
-  `member_num` int(20) NOT NULL,
-  `pick-up_odometer_reading` int(20) NOT NULL,
-  `drop-off_odometer_reading` int(20) NOT NULL,
-  `status` enum('Normal','Damaged','Not Running') NOT NULL,
-  `rent_date` date NOT NULL,
-  `pick-up_time` time NOT NULL,
-  `drop-off_time` time NOT NULL,
-  PRIMARY KEY (`rent_date`,`vin`,`member_num`),
-  KEY `FK_member_rental_history_member` (`member_num`),
-  CONSTRAINT `FK_member_rental_history_member` FOREIGN KEY (`member_num`) REFERENCES `member` (`member_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Dumping data for table 332.member_rental_history: ~0 rows (approximately)
-/*!40000 ALTER TABLE `member_rental_history` DISABLE KEYS */;
-/*!40000 ALTER TABLE `member_rental_history` ENABLE KEYS */;
 
 -- Dumping structure for table 332.parking_location
 CREATE TABLE IF NOT EXISTS `parking_location` (
@@ -144,6 +111,30 @@ INSERT INTO `parking_location` (`parking_address`, `num_spaces`) VALUES
 	('20 Division St', 100),
 	('67 Albert St', 55);
 /*!40000 ALTER TABLE `parking_location` ENABLE KEYS */;
+
+-- Dumping structure for table 332.rental_history
+CREATE TABLE IF NOT EXISTS `rental_history` (
+  `vin` varchar(20) NOT NULL,
+  `member_num` int(20) NOT NULL,
+  `pick-up_odometer_reading` int(20) NOT NULL,
+  `drop-off_odometer_reading` int(20) NOT NULL,
+  `status` enum('Normal','Damaged','Not Running') NOT NULL,
+  `rent_date` date NOT NULL,
+  `pick-up_time` time NOT NULL,
+  `drop-off_time` time NOT NULL,
+  PRIMARY KEY (`rent_date`,`vin`,`member_num`),
+  KEY `FK_member_rental_history_member` (`member_num`),
+  KEY `FK_rental_history_car` (`vin`),
+  CONSTRAINT `FK_member_rental_history_member` FOREIGN KEY (`member_num`) REFERENCES `member` (`member_num`),
+  CONSTRAINT `FK_rental_history_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table 332.rental_history: ~2 rows (approximately)
+/*!40000 ALTER TABLE `rental_history` DISABLE KEYS */;
+INSERT INTO `rental_history` (`vin`, `member_num`, `pick-up_odometer_reading`, `drop-off_odometer_reading`, `status`, `rent_date`, `pick-up_time`, `drop-off_time`) VALUES
+	('123gh45rt7y6534rw', 123456, 34576, 37645, 'Normal', '2017-03-02', '00:00:00', '13:12:13'),
+	('736hfyst618hye76t', 654321, 3245, 7654, 'Normal', '2017-03-02', '08:56:17', '12:34:19');
+/*!40000 ALTER TABLE `rental_history` ENABLE KEYS */;
 
 -- Dumping structure for table 332.reservation
 CREATE TABLE IF NOT EXISTS `reservation` (
