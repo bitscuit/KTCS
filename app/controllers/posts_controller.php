@@ -3,7 +3,8 @@
     public function index() {
       // we store all the posts in a variable
       $posts = Post::all();
-      require_once('views/posts/index.php');
+      //require_once('views/posts/index.php');
+      require_once('views/posts/Sign-In.html');
     }
 
     public function show() {
