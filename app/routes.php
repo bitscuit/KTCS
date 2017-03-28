@@ -8,11 +8,12 @@
 			case 'home':
 				$controller = new HomeController();
 			break;
-			
+
 			case 'sign_in':
+				require_once('models/user.php');
 				$controller = new SignInController();
 			break;
-			
+
 			case 'error':
 				$controller = new ErrorController();
 			break;
