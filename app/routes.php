@@ -1,32 +1,41 @@
 <?php
-  function call($controller, $action) {
-    require_once('controllers/' . $controller . '_controller.php');
+	function call($controller, $action) {
+		// all controllers should be named <controller_name>_controller.php
+		require_once('controllers/' . $controller . '_controller.php');
 
-    switch($controller) {
-      case 'pages':
-        $controller = new PagesController();
-      break;
-      case 'posts':
-        // we need the model to query the database later in the controller
-        require_once('models/post.php');
-        $controller = new PostsController();
-      break;
-    }
+		// instantiate appropriate controller
+		switch($controller) {
+			case 'home':
+				$controller = new HomeController();
+			break;
+			
+			case 'sign_in':
+				$controller = new SignInController();
+			break;
+			
+			case 'error':
+				$controller = new ErrorController();
+			break;
+		}
 
-    $controller->{ $action }();
-  }
+	// call action in the controller
+	$controller->{ $action }();
+	}
 
-  // we're adding an entry for the new controller and its actions
-  $controllers = array('pages' => ['home', 'error'],
-                       'posts' => ['index', 'show']);
+	// list of valid controllers and actions associated with those controllers
+	// format: <controller> => [<action1>, <action2>, ...]
+	$controllers = array('home' => ['getViewHome'],
+		   'sign_in' => ['getViewSignIn']);
 
-  if (array_key_exists($controller, $controllers)) {
-    if (in_array($action, $controllers[$controller])) {
-      call($controller, $action);
-    } else {
-      call('pages', 'error');
-    }
-  } else {
-    call('pages', 'error');
-  }
+	// if valid controller and action, execute action in that controller
+	// otherwise redirect to error page
+	if (array_key_exists($controller, $controllers)) {
+		if (in_array($action, $controllers[$controller])) {
+			call($controller, $action);
+		} else {
+			call('error', 'getViewError');
+		}
+	} else {
+		call('error', 'getViewError');
+	}
 ?>
