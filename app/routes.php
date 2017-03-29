@@ -17,6 +17,9 @@
 			case 'error':
 				$controller = new ErrorController();
 			break;
+			case 'register':
+				$controller = new RegisterController();
+			break;
 		}
 
 	// call action in the controller
@@ -26,7 +29,9 @@
 	// list of valid controllers and actions associated with those controllers
 	// format: <controller> => [<action1>, <action2>, ...]
 	$controllers = array('home' => ['getViewHome'],
-		   'sign_in' => ['getViewSignIn']);
+			'error' => ['getViewError'],
+		   	'sign_in' => ['getViewSignIn'],
+			'register' => ['getViewRegister']);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page
