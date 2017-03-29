@@ -5,7 +5,7 @@ class LocationController {
         $list = Location::all();
         foreach ($list as $row) {
             echo "<tr>";
-            echo "<td>" . $row['parking_address'] . "</td>";
+            echo "<td class='tableData'>" . $row['parking_address'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";

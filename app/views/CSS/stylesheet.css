@@ -1,0 +1,23 @@
+html {
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.table {
+    width: 100%;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table, .tableHeader, .tableData {
+    border: 1px solid black;
+}
+
+.tableData {
+    text-align: center;
+}
+
+.tableData, .tableHeader {
+    padding: 15px;
+}
