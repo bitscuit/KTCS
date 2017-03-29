@@ -79,7 +79,7 @@ INSERT INTO `comment` (`member_num`, `vin`, `rating`, `comment_text`, `comment_t
 
 -- Dumping structure for table 332.member
 CREATE TABLE IF NOT EXISTS `member` (
-  `member_num` int(20) NOT NULL,
+  `member_num` int(20) NOT NULL AUTO_INCREMENT,
   `f_name` varchar(50) NOT NULL,
   `l_name` varchar(50) NOT NULL,
   `phone_num` varchar(10) NOT NULL,
