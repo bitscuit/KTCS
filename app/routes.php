@@ -21,6 +21,10 @@
 				require_once('models/user.php');
 				$controller = new RegisterController();
 			break;
+			case 'location':
+				require_once('models/location.php');
+				$controller = new LocationController();
+			break;
 		}
 
 	// call action in the controller
@@ -32,7 +36,8 @@
 	$controllers = array('home' => ['getViewHome'],
 			'error' => ['getViewError'],
 		   	'sign_in' => ['getViewSignIn'],
-			'register' => ['getViewRegister']);
+			'register' => ['getViewRegister'],
+			'location' => ['getViewLocation']);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

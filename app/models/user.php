@@ -26,21 +26,7 @@ class User {
         $this->username       = $username;
         $this->password       = $password;
     }
-
-    // public static function all() {
-    //   $list = [];
-    //   $db = Db::getInstance();
-    //   $req = $db->query('SELECT * FROM member');
-    //
-    //   // we create a list of Post objects from the database results
-    //   foreach($req->fetchAll() as $member) {
-    //     $list[] = new User($member['member_num'], $member['f_name'], $member['l_name'], $member['phone_num'],
-    //         $member['email'], $member['license_num'], $member['annual_mem_fee'], $member['role'], $member['username'], $member['password']);
-    //   }
-    //
-    //   return $list;
-    // }
-
+    
     public static function signIn($uname, $pass) {
         $list = [];
         $db = Db::getInstance();
