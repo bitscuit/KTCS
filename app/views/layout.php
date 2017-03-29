@@ -18,14 +18,14 @@
 		<header>
 		<!-- header should have a script to determine which header to show -->
 		<h1>Kingston Town Car Share</h1>
-		<a href='/KTCS/app'>Home</a>
-		<a href='?controller=sign_in&action=getViewSignIn'>Sign In</a>
-		<a href='?controller=location&action=getViewLocation'>Location</a>
-		<?php require_once('views/header/header.html');?>
+		<a href="/KTCS/app">Home</a>
+		<a href="?controller=sign_in&action=getViewSignIn">Sign In</a>
+		<a href="?controller=location&action=getViewLocation">Location</a>
+		<?php require_once("views/header/header.html");?>
 		</header>
 
 		<!-- route to the appropriate controller and action to display the proper view -->
-		<?php require_once('routes.php'); ?>
+		<?php require_once("routes.php"); ?>
 
 		<footer>
 		<!-- footer will have script to determine which footer to show -->
