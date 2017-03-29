@@ -1,7 +1,9 @@
 <?php
 class RegisterController {
     public function getViewRegister() {
-        if(isset($_POST['username']) && isset($_POST['password'])) {
+        if(isset($_POST['username']) && isset($_POST['password']) &&
+            isset($_POST['first_name']) && isset($_POST['last_name']) &&
+            isset($_POST['phone_num']) && isset($_POST['license_num'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $fName = $_POST['first_name'];
@@ -16,7 +18,7 @@ class RegisterController {
                 exit;
             }
         } else {
-            // call('pages', 'error');
+            echo 'Not registered';
         }
         require_once('views/register/register.php');
     }

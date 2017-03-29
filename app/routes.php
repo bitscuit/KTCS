@@ -18,6 +18,7 @@
 				$controller = new ErrorController();
 			break;
 			case 'register':
+				require_once('models/user.php');
 				$controller = new RegisterController();
 			break;
 		}

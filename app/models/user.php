@@ -64,18 +64,20 @@ class User {
     public static function register($fName, $lName, $phoneNum, $email,
         $licenseNum, $username, $password) {
         $db = Db::getInstance();
-        $sql = 'INSERT INTO member (f_name, l_name, phone_num, email,
+        $sql = 'INSERT INTO member (member_num, f_name, l_name, phone_num, email,
             license_num, annual_mem_fee, role, username, password)
-            VALUES (:fName, :lName, :phoneNum, :email,
-                :licenseNum, :annualMemFee, :role, :username, :password)';
+            VALUES (DEFAULT, :fName, :lName, :phoneNum, :email,
+            :licenseNum, :annualMemFee, :role, :username, :password)';
         $req = $db->prepare($sql);
         $req->bindParam(':fName', $fName);
         $req->bindParam(':lName', $lName);
         $req->bindParam(':phoneNum', $phoneNum);
         $req->bindParam(':email', $email);
-        $req->bindParam(':license_num', $licenseNum);
-        $req->bindParam(':annualMemFee', 60);
-        $req->bindParam(':role', 'User');
+        $req->bindParam(':licenseNum', $licenseNum);
+        $annualMemFee = 60;
+        $req->bindParam(':annualMemFee', $annualMemFee);
+        $role = "User";
+        $req->bindParam(':role', $role);
         $req->bindParam(':username', $username);
         $req->bindParam(':password', $password);
         $success = $req->execute();

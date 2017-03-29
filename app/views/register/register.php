@@ -11,7 +11,7 @@
 
 				<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-				<form id="loginform" class="form-horizontal" role="form" action="" method="POST">
+				<form id="registerform" class="form-horizontal" role="form" action="" method="POST">
 
 					<div class="form-group">
 						<label for="first_name" class="col-md-3 control-label">First Name</label>
@@ -58,7 +58,7 @@
 					<div class="form-group">
 						<label for="password" class="col-md-3 control-label">Password</label>
 						<div class="col-md-9">
-							<input type="password" class="form-control" name="passwd" placeholder="Password">
+							<input type="password" class="form-control" name="password" placeholder="Password">
 						</div>
 					</div>
 
