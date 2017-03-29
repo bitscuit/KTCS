@@ -5,7 +5,9 @@
         $uname = $_POST['username'];
         $pass = $_POST['password'];
         if (User::signIn($uname, $pass)) {
-          // call('pages', 'home');
+            header("Location: ?controller=home&action=getViewHome");
+            exit;
+        //   call('home', 'getViewHome');
         }
       } else {
         // call('pages', 'error');

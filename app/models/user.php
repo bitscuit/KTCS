@@ -54,10 +54,8 @@
 
       // Checks to see that user exists. Returns true if so. False otherwise.
       if ($member != null) {
-        echo "not null";
         return true;
       } else {
-        echo "null";
         return false;
       }
     } // end signIn function
