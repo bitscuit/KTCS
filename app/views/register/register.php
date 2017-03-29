@@ -11,7 +11,7 @@
 
 				<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-				<form id="loginform" class="form-horizontal" role="form">
+				<form id="loginform" class="form-horizontal" role="form" action="" method="POST">
 
 					<div class="form-group">
 						<label for="first_name" class="col-md-3 control-label">First Name</label>
@@ -19,35 +19,35 @@
 							<input type="text" class="form-control" name="first_name" placeholder="First Name">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="last_name" class="col-md-3 control-label">Last Name</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" name="last_name" placeholder="Last Name">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="phone_num" class="col-md-3 control-label">Phone #</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" name="phone_num" placeholder="Phone #">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="email" class="col-md-3 control-label">Email</label>
 						<div class="col-md-9">
 							<input type="email" class="form-control" name="email" placeholder="Email Address">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="license_num" class="col-md-3 control-label">License #</label>
 						<div class="col-md-9">
 							<input type="text" class="form-control" name="license_num" placeholder="License Number">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="username" class="col-md-3 control-label">Username</label>
 						<div class="col-md-9">
@@ -66,7 +66,7 @@
 							<!-- Button -->
 
 						<div class="col-sm-12 controls">
-							<a href="#"><button class="btn btn-info btn-block" id="btn-login">Register</button></a>
+							<input type="submit" class="btn btn-info btn-block" id="btn-login">
 						</div>
 					</div>
 
