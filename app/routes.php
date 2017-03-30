@@ -13,16 +13,24 @@
 				require_once("models/user.php");
 				$controller = new SignInController();
 			break;
+			
 			case "error":
 				$controller = new ErrorController();
 			break;
+			
 			case "register":
 				require_once("models/user.php");
 				$controller = new RegisterController();
 			break;
+			
 			case "location":
 				require_once("models/location.php");
 				$controller = new LocationController();
+			break;
+
+			case 'rental_history':
+				require_once('models/rental_history.php');
+				$controller = new RentalHistoryController();
 			break;
 		}
 
