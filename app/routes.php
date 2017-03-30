@@ -50,7 +50,7 @@
 						"register" => ["getViewRegister"],
 						"location" => ["getViewLocation"],
 						"rental_history" => ["getViewRentalHistory"],
-						"comment" => ["getViewComment"]);
+						"comment" => ["getViewPostComment", "getViewComment"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

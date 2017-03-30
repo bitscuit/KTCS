@@ -6,7 +6,8 @@
 				echo '<a href="?controller=sign_in&action=getViewLogout">Logout</a>';
 				echo '<a href="?controller=location&action=getViewLocation">Location</a>';
 				echo '<a href="?controller=rental_history&action=getViewRentalHistory">Rental History</a>';
-				echo '<a href="?controller=comment&action=getViewComment">Comment</a>';
+				echo '<a href="?controller=comment&action=getViewPostComment">Post Comment</a>';
+				echo '<a href="?controller=comment&action=getViewComment">View Comment</a>';
 			} else {
 				echo "not signed in!!";
 			}

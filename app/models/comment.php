@@ -44,5 +44,29 @@
             $list = $req->fetchAll(PDO::FETCH_ASSOC);
             return $list;
         }
+
+        public function selectComment($vin, $rating) {
+            $list = [];
+            $db = Db::getInstance();
+            if ($vin == "" && $rating == "") {
+                return null;
+            } else if ($vin == "" && $rating != "") {
+                $sql = "SELECT * FROM comment WHERE rating = :rating";
+                $req = $db->prepare($sql);
+                $req->bindParam(":rating", $rating);
+            } else if ($vin != "" && $rating == "") {
+                $sql = "SELECT * FROM comment WHERE vin = :vin";
+                $req = $db->prepare($sql);
+                $req->bindParam(":vin", $vin);
+            } else {
+                $sql = "SELECT * FROM comment WHERE vin = :vin AND rating = :rating";
+                $req = $db->prepare($sql);
+                $req->bindParam(":vin", $vin);
+                $req->bindParam(":rating", $rating);
+            }
+            $req->execute();
+            $list = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $list;
+        }
     }
 ?>

@@ -25,7 +25,8 @@
 		<a href="?controller=sign_in&action=getViewSignIn">Sign In</a>
 		<a href="?controller=location&action=getViewLocation">Location</a>
 		<a href="?controller=rental_history&action=getViewRentalHistory">Rental History</a>
-		<a href="?controller=comment&action=getViewComment">Comment</a>
+		<a href="?controller=comment&action=getViewPostComment">Post Comment</a>
+		<a href="?controller=comment&action=getViewComment">View Comment</a>
 
 		<?php require_once("views/header/header.html");?>
 		</header>
