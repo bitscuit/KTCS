@@ -90,13 +90,16 @@ CREATE TABLE IF NOT EXISTS `member` (
   `username` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL,
   PRIMARY KEY (`member_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=654325 DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.member: ~2 rows (approximately)
+-- Dumping data for table 332.member: ~5 rows (approximately)
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
 INSERT INTO `member` (`member_num`, `f_name`, `l_name`, `phone_num`, `email`, `license_num`, `annual_mem_fee`, `role`, `username`, `password`) VALUES
 	(123456, 'Mitch', 'Mulder', '905-756-73', NULL, 'L4762-73672-37262', 100.25, 'User', 'MitchMulder', 'rVs7ucMHad1i8V'),
-	(654321, 'Michael', 'Tanel', '905-362-37', 'michael.tanel@queensu.ca', 'M6352-72653-74653', 100.25, 'Admin', 'MichaelTanel', 'uThQkusSKCtym4');
+	(654321, 'Michael', 'Tanel', '905-362-37', 'michael.tanel@queensu.ca', 'M6352-72653-74653', 100.25, 'Admin', 'MichaelTanel', 'uThQkusSKCtym4'),
+	(654322, 'Michael', 'Tanel', '4166026133', 'm_tanel@live.ca', '892', 60.00, 'User', 'mtanel', 'mtanel'),
+	(654323, 'Michael', 'Tanel', '4166026133', 'm_tanel@live.ca', '1234', 60.00, 'User', 'mike', 'mike'),
+	(654324, 'hank', 'hank', '8888888888', 'hank@li.ca', 'hank', 60.00, 'User', 'hankli', 'hankli');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 
 -- Dumping structure for table 332.parking_location
@@ -106,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `parking_location` (
   PRIMARY KEY (`parking_address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.parking_location: ~1 rows (approximately)
+-- Dumping data for table 332.parking_location: ~2 rows (approximately)
 /*!40000 ALTER TABLE `parking_location` DISABLE KEYS */;
 INSERT INTO `parking_location` (`parking_address`, `num_spaces`) VALUES
 	('20 Division St', 100),
@@ -117,12 +120,12 @@ INSERT INTO `parking_location` (`parking_address`, `num_spaces`) VALUES
 CREATE TABLE IF NOT EXISTS `rental_history` (
   `vin` varchar(20) NOT NULL,
   `member_num` int(20) NOT NULL,
-  `pick-up_odometer_reading` int(20) NOT NULL,
-  `drop-off_odometer_reading` int(20) NOT NULL,
+  `pick_up_odometer_reading` int(20) NOT NULL,
+  `drop_off_odometer_reading` int(20) NOT NULL,
   `status` enum('Normal','Damaged','Not Running') NOT NULL,
   `rent_date` date NOT NULL,
-  `pick-up_time` time NOT NULL,
-  `drop-off_time` time NOT NULL,
+  `pick_up_time` time NOT NULL,
+  `drop_off_time` time NOT NULL,
   PRIMARY KEY (`rent_date`,`vin`,`member_num`),
   KEY `FK_member_rental_history_member` (`member_num`),
   KEY `FK_rental_history_car` (`vin`),
@@ -130,11 +133,12 @@ CREATE TABLE IF NOT EXISTS `rental_history` (
   CONSTRAINT `FK_rental_history_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.rental_history: ~2 rows (approximately)
+-- Dumping data for table 332.rental_history: ~3 rows (approximately)
 /*!40000 ALTER TABLE `rental_history` DISABLE KEYS */;
-INSERT INTO `rental_history` (`vin`, `member_num`, `pick-up_odometer_reading`, `drop-off_odometer_reading`, `status`, `rent_date`, `pick-up_time`, `drop-off_time`) VALUES
+INSERT INTO `rental_history` (`vin`, `member_num`, `pick_up_odometer_reading`, `drop_off_odometer_reading`, `status`, `rent_date`, `pick_up_time`, `drop_off_time`) VALUES
 	('123gh45rt7y6534rw', 123456, 34576, 37645, 'Normal', '2017-03-02', '00:00:00', '13:12:13'),
-	('736hfyst618hye76t', 654321, 3245, 7654, 'Normal', '2017-03-02', '08:56:17', '12:34:19');
+	('736hfyst618hye76t', 654321, 3245, 7654, 'Normal', '2017-03-02', '08:56:17', '12:34:19'),
+	('736hfyst618hye76t', 654322, 8888, 8888, 'Normal', '2017-03-29', '22:22:29', '22:22:29');
 /*!40000 ALTER TABLE `rental_history` ENABLE KEYS */;
 
 -- Dumping structure for table 332.reservation
@@ -142,9 +146,9 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `reservation_num` int(11) NOT NULL AUTO_INCREMENT,
   `member_num` int(20) NOT NULL,
   `vin` varchar(20) NOT NULL,
-  `reservation_date` date NOT NULL,
+  `reservation_start_date` date NOT NULL,
   `access_code` int(20) NOT NULL,
-  `reservation_length` int(5) NOT NULL,
+  `reservation_end_date` date NOT NULL,
   PRIMARY KEY (`reservation_num`),
   KEY `FK_reservation_car` (`vin`),
   KEY `FK_reservation_member` (`member_num`),
@@ -154,9 +158,9 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 
 -- Dumping data for table 332.reservation: ~2 rows (approximately)
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` (`reservation_num`, `member_num`, `vin`, `reservation_date`, `access_code`, `reservation_length`) VALUES
-	(1, 654321, '736hfyst618hye76t', '2017-03-02', 1234, 2),
-	(2, 123456, '123gh45rt7y6534rw', '2017-03-02', 432176, 4);
+INSERT INTO `reservation` (`reservation_num`, `member_num`, `vin`, `reservation_start_date`, `access_code`, `reservation_end_date`) VALUES
+	(1, 654321, '736hfyst618hye76t', '2017-03-02', 1234, '0000-00-00'),
+	(2, 123456, '123gh45rt7y6534rw', '2017-03-02', 432176, '0000-00-00');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
