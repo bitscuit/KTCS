@@ -44,7 +44,8 @@
 						"error" => ["getViewError"],
 						"sign_in" => ["getViewSignIn"],
 						"register" => ["getViewRegister"],
-						"location" => ["getViewLocation"]);
+						"location" => ["getViewLocation"],
+						"rental_history" => ["getViewRentalHistory"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

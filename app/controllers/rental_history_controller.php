@@ -1,15 +1,8 @@
 <?php
 class RentalHistoryController {
     public function getViewRentalHistory() {
-        $history = RentalHistory::selectHistory($member_num);
-		if ($history != null) {
-			foreach($history as $historyPiece) {
-				echo $historyPiece['vin'];
-			}
-		} else {
-			
-		}
-        // require_once('views/register/register.php');
+        $history = RentalHistory::selectHistory($_SESSION["memberNum"]);
+		require_once('views/rental_history/rental_history.php');
     }
 }
 ?>
