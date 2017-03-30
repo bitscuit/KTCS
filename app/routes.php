@@ -13,16 +13,16 @@
 				require_once("models/user.php");
 				$controller = new SignInController();
 			break;
-			
+
 			case "error":
 				$controller = new ErrorController();
 			break;
-			
+
 			case "register":
 				require_once("models/user.php");
 				$controller = new RegisterController();
 			break;
-			
+
 			case "location":
 				require_once("models/location.php");
 				$controller = new LocationController();
@@ -31,6 +31,10 @@
 			case 'rental_history':
 				require_once('models/rental_history.php');
 				$controller = new RentalHistoryController();
+			break;
+			case "comment":
+				require_once('models/comment.php');
+				$controller = new CommentController();
 			break;
 		}
 
@@ -45,7 +49,8 @@
 						"sign_in" => ["getViewSignIn"],
 						"register" => ["getViewRegister"],
 						"location" => ["getViewLocation"],
-						"rental_history" => ["getViewRentalHistory"]);
+						"rental_history" => ["getViewRentalHistory"],
+						"comment" => ["getViewComment"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page
