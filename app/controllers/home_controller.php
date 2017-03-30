@@ -2,7 +2,7 @@
 	class HomeController {
 		public function getViewHome() {
 			if ($_SESSION["signIn"] == 1) {
-				echo "signed in!!";
+				echo "Welcome " . $_SESSION["memberNum"];
 			} else {
 				echo "not signed in!!";
 			}

@@ -30,7 +30,7 @@
 		public static function signIn($uname, $pass) {
 			$list = [];
 			$db = Db::getInstance();
-			$sql = "SELECT username, password FROM member";
+			$sql = "SELECT username, password, member_num FROM member";
 			$sql .= " WHERE username = :username";
 			$sql .= " AND password = :password";
 			$req = $db->prepare($sql);
@@ -38,9 +38,9 @@
 			$req->bindParam(":password", $pass);
 			$req->execute();
 			$member = $req->fetch();
-
 			// Checks to see that user exists. Returns true if so. False otherwise.
 			if ($member != null) {
+				$_SESSION["memberNum"] = $member["member_num"];
 				return true;
 			} else {
 				return false;

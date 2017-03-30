@@ -6,7 +6,6 @@ class SignInController {
             $pass = $_POST["password"];
             if (User::signIn($uname, $pass)) {
                 $_SESSION["signIn"] = 1;
-				
 				header("Location: ?controller=home&action=getViewHome");
 				print_r($_SESSION);
                 exit;
