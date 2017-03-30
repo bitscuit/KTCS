@@ -46,7 +46,7 @@
 	// format: <controller> => [<action1>, <action2>, ...]
 	$controllers = array("home" => ["getViewHome"],
 						"error" => ["getViewError"],
-						"sign_in" => ["getViewSignIn"],
+						"sign_in" => ["getViewSignIn", "getViewLogout"],
 						"register" => ["getViewRegister"],
 						"location" => ["getViewLocation"],
 						"rental_history" => ["getViewRentalHistory"],
