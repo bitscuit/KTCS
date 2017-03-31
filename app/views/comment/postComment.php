@@ -29,7 +29,12 @@
                     <div class="form-group">
 						<label for="rating" class="col-md-3 control-label">Rating</label>
 						<div class="col-md-9">
-							<input type="text" class="form-control" name="rating">
+							<select name="rating[]">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
 						</div>
 					</div>
 

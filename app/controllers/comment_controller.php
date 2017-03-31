@@ -3,7 +3,7 @@ class CommentController {
     public function getViewPostComment() {
         $list = Comment::selectVin();
         if(isset($_POST["rating"]) && isset($_POST["commentText"])) {
-            $rating = $_POST["rating"];
+            $rating = $_POST["rating"][0];
             $commentText = $_POST["commentText"];
             $vin = $_POST["vin"][0];
             echo $rating . $commentText . $_POST["vin"][0] . $_SESSION["memberNum"];
