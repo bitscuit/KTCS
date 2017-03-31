@@ -32,14 +32,21 @@
 				require_once('models/rental_history.php');
 				$controller = new RentalHistoryController();
 			break;
+			
 			case "comment":
 				require_once('models/comment.php');
 				$controller = new CommentController();
 			break;
+			
 			case "car":
 				require_once("models/car.php");
 				$controller = new CarController();
 			break;
+			
+			case "user":
+				require_once("models/comment.php");
+				require_once("models/pick_up.php");
+				$controller = new UserController();
 		}
 
 	// call action in the controller
@@ -55,7 +62,8 @@
 						"location" => ["getViewLocation"],
 						"rental_history" => ["getViewRentalHistory"],
 						"comment" => ["getViewPostComment", "getViewComment"],
-						"car" => ["getViewAvailableCars", "getViewAllCars", "getViewLocationCars"]);
+						"car" => ["getViewAvailableCars", "getViewAllCars", "getViewLocationCars"],
+						"user" => ["getViewPickUp"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

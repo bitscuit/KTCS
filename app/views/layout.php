@@ -28,6 +28,7 @@
 		<a href="?controller=comment&action=getViewPostComment">Post Comment</a>
 		<a href="?controller=comment&action=getViewComment">View Comment</a>
 		<a href="?controller=car&action=getViewAvailableCars">Available Cars</a>
+		<a href="?controller=user&action=getViewPickUp">Pick Up</a>
 
 		<?php require_once("views/header/header.html");?>
 		</header>

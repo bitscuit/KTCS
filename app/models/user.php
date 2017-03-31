@@ -1,7 +1,5 @@
 <?php
 	class User {
-		// we define 3 attributes
-		// they are public so that we can access them using $post->author directly
 		public $member_num;
 		public $f_name;
 		public $l_name;
