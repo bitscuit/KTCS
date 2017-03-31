@@ -8,6 +8,7 @@
 				echo '<a href="?controller=rental_history&action=getViewRentalHistory">Rental History</a>';
 				echo '<a href="?controller=comment&action=getViewPostComment">Post Comment</a>';
 				echo '<a href="?controller=comment&action=getViewComment">View Comment</a>';
+				echo '<a href="?controller=car&action=getViewAvailableCars">Available Cars</a>';
 			} else {
 				echo "not signed in!!";
 			}
