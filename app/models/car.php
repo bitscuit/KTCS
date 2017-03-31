@@ -19,7 +19,7 @@
 		}
 		
 		// retrieves list of all cars
-		public static fucntion getAllCars() {
+		public static function getAllCars() {
 			
 		}
 		
@@ -30,9 +30,11 @@
 			}
 			$db = Db::getInstance();
 			$sql = "SELECT make, model, make_year";
-			$sql .= " FROM car NATURAL JOIN reservation"
+			$sql .= " FROM car NATURAL JOIN reservation";
 			$sql .= " reservation_end_date < :date";
 			$req = $db->prepare($sql);
+			$date = new DateTime($date);
+			$date->format('Y-m-d');
 			$req-> bindParam(":date", $date);
 			$req->execute();
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);

@@ -36,6 +36,10 @@
 				require_once('models/comment.php');
 				$controller = new CommentController();
 			break;
+			case "car":
+				require_once("models/car.php");
+				$controller = new CarController();
+			break;
 		}
 
 	// call action in the controller
@@ -50,7 +54,8 @@
 						"register" => ["getViewRegister"],
 						"location" => ["getViewLocation"],
 						"rental_history" => ["getViewRentalHistory"],
-						"comment" => ["getViewPostComment", "getViewComment"]);
+						"comment" => ["getViewPostComment", "getViewComment"],
+						"car" => ["getViewAvailableCars", "getViewAllCars"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page
