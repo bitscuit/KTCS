@@ -5,14 +5,26 @@ class CarController {
 			
 			if (isset($_POST["carsOnDate"])) {
 				$date = $_POST["carsOnDate"];
+				echo $date;
 				$list = Car::getAvailableCars($date);
+					echo "<table>";
+					echo "<tr>";
+					echo "<th>Make</th>";
+					echo "<th>Model</th>";
+					echo "<th>Year</th>";
+					echo "</tr>";
 				if (!empty($list)) {
 					foreach ($list as $row) {
-						print_r($row);
+						echo "<tr>";
+						echo "<td>" . $row["make"] . "</td>";
+						echo "<td>" . $row["model"] . "</td>";
+						echo "<td>" . $row["make_year"] . "</td>";
+						echo "</tr>";
 					}
 				} else {
 					echo "No available cars on this date";
 				}
+				echo "</table>";
 			}
 			// get view to show list of available cars
 			require_once("views/car/available_cars.php");
