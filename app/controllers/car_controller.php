@@ -1,20 +1,22 @@
 <?php
 class CarController {
     public function getViewAvailableCars() {
-		
-        if(isset($_POST["username"]) && isset($_POST["password"])) {
-            $uname = $_POST["username"];
-            $pass = $_POST["password"];
-            if (User::signIn($uname, $pass)) {
-                $_SESSION["signIn"] = 1;
-				header("Location: ?controller=home&action=getViewHome");
-				print_r($_SESSION);
-                exit;
-            } else {
-				$_SESSION["signIn"] = 0;
+		if (isset($_SESSION["signIn"] && $_SESSEION["signIn"] == 1) {
+			$list = Car::getAvailableCars($date);
+			
+			if (!empty($list)) {
+				foreach ($list as $row) {
+					print_r($row);
+				}
+			} else {
+				echo "No available cars on this date";
 			}
-        }
-        require_once("views/sign_in/sign_in.php");
+			// get view to show list of available cars
+			require_once("views/car/available_cars.php");
+		} else {
+			header("Location: ?controller=error&action=getViewError");
+			exit;
+		}
     }
 }
 ?>

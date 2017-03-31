@@ -18,6 +18,12 @@
 			$this->daily_rental_fee = $daily_rental_fee;
 		}
 		
+		// retrieves list of all cars
+		public static fucntion getAllCars() {
+			
+		}
+		
+		// retrieves list of avaiable cars available for rental on specified date
 		public static function getAvailableCars($date) {
 			if (!isset($date)) {
 				$date = date("y.m.d");
