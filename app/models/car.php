@@ -17,12 +17,12 @@
 			$this->make_year = $make_year;
 			$this->daily_rental_fee = $daily_rental_fee;
 		}
-		
+
 		// retrieves list of all cars
 		public static function getAllCars() {
-			
+
 		}
-		
+
 		// retrieves list of avaiable cars available for rental on specified date
 		public static function getAvailableCars($date) {
 			if (!isset($date)) {
@@ -40,5 +40,13 @@
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
 		}
+
+		// public static function getLocationCars($date, $location) {
+		// 	$list = [];
+		// 	$db = Db::getInstance();
+		// 	$sql = "SELECT make, model, make_year";
+		// 	$sql .= " FROM car NATURAL JOIN reservation";
+		// 	$sql .= " reservation_end_date < :date AND ";
+		// }
 	}
 ?>

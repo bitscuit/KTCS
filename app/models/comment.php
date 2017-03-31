@@ -15,7 +15,7 @@
             $this->commentTime = $commenTi;
         }
 
-        public function insertComment($rating, $commentText, $vin) {
+        public static function insertComment($rating, $commentText, $vin) {
             $list = [];
 			$db = Db::getInstance();
 			$sql = "INSERT INTO comment (member_num, vin, rating, comment_text,
@@ -35,7 +35,7 @@
 			}
         }
 
-        public function selectVin() {
+        public static function selectVin() {
             $list = [];
             $db = Db::getInstance();
             $sql = "SELECT vin FROM car";
@@ -45,7 +45,7 @@
             return $list;
         }
 
-        public function selectComment($vin, $rating) {
+        public static function selectComment($vin, $rating) {
             $list = [];
             $db = Db::getInstance();
             if ($vin == "" && $rating == "") {
