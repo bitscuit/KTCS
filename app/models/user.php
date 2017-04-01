@@ -11,18 +11,9 @@
 		public $username;
 		public $password;
 
-		public function __construct($member_num, $f_name, $l_name, $phone_num,
-		$email, $license_num, $annual_mem_fee, $role, $username, $password) {
+		public function __construct($member_num, $username) {
 			$this->member_num     = $member_num;
-			$this->f_name         = $f_name;
-			$this->l_name         = $l_name;
-			$this->phone_num      = $phone_num;
-			$this->email          = $email;
-			$this->license_num    = $license_num;
-			$this->annual_mem_fee = $annual_mem_fee;
-			$this->role           = $role;
 			$this->username       = $username;
-			$this->password       = $password;
 		}
 
 		public static function signIn($uname, $pass) {
@@ -39,9 +30,9 @@
 			// Checks to see that user exists. Returns true if so. False otherwise.
 			if ($member != null) {
 				$_SESSION["memberNum"] = $member["member_num"];
-				return true;
+				return new User($member["member_num"], $uname);
 			} else {
-				return false;
+				return null;
 			}
 		}
 
