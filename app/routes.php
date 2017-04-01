@@ -43,7 +43,7 @@
 							"getViewRentalHistory", "getViewPostComment",
 							"getViewComment", "getViewAvailableCars",
 							"getViewAllCars", "getViewLocationCars", "getViewDropOff"],
-						"car" => ["getViewComment", "getViewAvailableCars", "getViewLocationCars", "getViewRentalHistory"]);
+						"car" => ["getViewComment", "getViewLocation", "getViewAvailableCars", "getViewLocationCars","getViewRentalHistory"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

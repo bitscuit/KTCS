@@ -36,14 +36,23 @@ class CarController {
     }
 
     public function getViewLocation() {
-        require_once('views/location/location.php');
-        $list = Location::all();
-        foreach ($list as $row) {
-            echo "<tr>";
-            echo "<td class='tableData'><a href='?controller=user&action=getViewLocationCars&location=" . $row['parking_address'] . "'>" . $row['parking_address'] . "</a></td>";
-            echo "</tr>";
+		if (isset($_GET["location"])) {
+            $location = $_GET["location"];
+            $list = Car::getLocationCars($location);
+            if (!empty($list)) {
+                foreach ($list as $row) {
+                    echo "<tr>";
+                    echo "<td>" . $row['make'] . "</td>";
+                    echo "<td>" . $row['model'] . "</td>";
+                    echo "<td>" . $row['make_year'] . "</td>";
+                    echo "</tr>";
+                }
+            }
+            echo "</table>";
+        } else {
+            echo "No available cars on this date";
         }
-        echo "</table>";
+        require_once("views/car/available_cars.php");
     }
 
 	// TODO filter by car
@@ -78,23 +87,14 @@ class CarController {
 
 	// Shows available cars on the current date in a specific location.
     public function getViewLocationCars() {
-        if (isset($_GET["location"])) {
-            $location = $_GET["location"];
-            $list = Car::getLocationCars($location);
-            if (!empty($list)) {
-                foreach ($list as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row['make'] . "</td>";
-                    echo "<td>" . $row['model'] . "</td>";
-                    echo "<td>" . $row['make_year'] . "</td>";
-                    echo "</tr>";
-                }
-            }
-            echo "</table>";
-        } else {
-            echo "No available cars on this date";
+         require_once('views/location/location.php');
+        $list = Location::all();
+        foreach ($list as $row) {
+            echo "<tr>";
+            echo "<td class='tableData'><a href='?controller=car&action=getViewLocationCars&location=" . $row['parking_address'] . "'>" . $row['parking_address'] . "</a></td>";
+            echo "</tr>";
         }
-        require_once("views/car/available_cars.php");
+        echo "</table>";
     }
 
 	// Admin function
