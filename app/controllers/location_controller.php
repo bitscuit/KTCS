@@ -1,6 +1,7 @@
 <?php
 class LocationController {
     public function getViewLocation() {
+        require_once('views/location/location.php');
         $list = Location::all();
         foreach ($list as $row) {
             echo "<tr>";
@@ -8,7 +9,6 @@ class LocationController {
             echo "</tr>";
         }
         echo "</table>";
-        require_once('views/location/location.php');
     }
 }
 ?>

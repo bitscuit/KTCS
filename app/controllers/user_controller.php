@@ -2,7 +2,7 @@
 class UserController {
     public function getViewPickUp() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-            $list = Comment::selectVin();
+            $vin = Comment::selectVin();
     		if(isset($_POST["vin"]) && isset($_POST["time"]) && isset($_POST["odometer_reading"]) && isset($_POST["car_status"])) {
     			$vin = $_POST["vin"][0];
     			$time = $_POST["time"];
