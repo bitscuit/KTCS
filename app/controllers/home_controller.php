@@ -10,6 +10,7 @@
 				echo '<a href="?controller=user&action=getViewComment">View Comment</a>';
 				echo '<a href="?controller=user&action=getViewAvailableCars">Available Cars</a>';
 				echo '<a href="?controller=user&action=getViewPickUp">Pick Up</a>';
+				echo '<a href="?controller=user&action=getViewDropOff">Drop Off</a>';
 			} else {
 				echo "not signed in!!";
 			}

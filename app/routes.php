@@ -17,7 +17,7 @@
 				require_once("models/car.php");
 				require_once("models/comment.php");
 				require_once("models/location.php");
-				require_once("models/pick_up.php");
+				require_once("models/pick_up_drop_off.php");
 				require_once("models/rental_history.php");
 				require_once("models/reservation.php");
 				require_once("models/user.php");
@@ -37,7 +37,8 @@
 						"getViewLogout", "getViewRegister", "getViewLocation",
 						"getViewRentalHistory", "getViewPostComment",
 						"getViewComment", "getViewAvailableCars",
-						"getViewAllCars", "getViewLocationCars"]);
+						"getViewAllCars", "getViewLocationCars",
+						"getViewDropOff"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page
