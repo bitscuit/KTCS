@@ -2,7 +2,7 @@
 	class HomeController {
 		public function getViewHome() {
 			if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-				echo "Welcome " . $_SESSION["memberNum"];
+				echo "Welcome " . $_SESSION["username"];
 				echo '<a href="?controller=user&action=getViewLogout">Logout</a>';
 				echo '<a href="?controller=user&action=getViewLocation">Location</a>';
 				echo '<a href="?controller=user&action=getViewRentalHistory">Rental History</a>';
