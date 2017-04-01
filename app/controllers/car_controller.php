@@ -2,27 +2,48 @@
 class CarController {
 
 	public $car;
-	
+
 	// Returns all comments for a specific car.
-    public function getViewComment() {
+	public function getViewComment() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $vin = Comment::selectVin();
-    		if(isset($_POST["vin"]) && isset($_POST["time"]) && isset($_POST["odometer_reading"]) && isset($_POST["car_status"])) {
-    			$vin = $_POST["vin"][0];
-    			$time = $_POST["time"];
-                $odometer_reading = $_POST["odometer_reading"];
-    			$date = date("Y-m-d");
-                $car_status = $_POST["car_status"];
-                if (PickUp::insertPickUp($vin, $_SESSION["memberNum"], $odometer_reading, $car_status, $date, $vin)) {
-                    header("Location: ?controller=home&action=getViewHome");
-                    exit;
+            echo "<table>
+                <tr>
+                    <th>Vin</th>
+                    <th>Rating</th>
+                    <th>Comment Text</th>
+                    <th>Comment Time</th>
+                </tr>";
+            if(isset($_POST["rating"]) && isset($_POST["vin"])) {
+                $list = Comment::selectComment($_POST["vin"][0], $_POST["rating"][0]);
+                if ($list != null) {
+                    foreach ($list as $row) {
+                        echo "<tr>";
+                        echo "<td>" . $row["vin"] . "</td>";
+                        echo "<td>" . $row["rating"] . "</td>";
+                        echo "<td>" . $row["comment_text"] . "</td>";
+                        echo "<td>" . $row["comment_time"] . "</td>";
+                        echo "</tr>";
+                    }
                 }
             }
+            echo "</table>";
             require_once("views/comment/view_comment.php");
         } else {
             header("Location: ?controller=error&action=getViewError");
 			exit;
         }
+    }
+
+    public function getViewLocation() {
+        require_once('views/location/location.php');
+        $list = Location::all();
+        foreach ($list as $row) {
+            echo "<tr>";
+            echo "<td class='tableData'><a href='?controller=user&action=getViewLocationCars&location=" . $row['parking_address'] . "'>" . $row['parking_address'] . "</a></td>";
+            echo "</tr>";
+        }
+        echo "</table>";
     }
 
 	// TODO filter by car
@@ -88,6 +109,6 @@ class CarController {
 			exit;
         }
     }
-	
+
 } // end CarController class
 ?>
