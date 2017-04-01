@@ -3,12 +3,12 @@
 		public function getViewHome() {
 			if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
 				echo "Welcome " . $_SESSION["memberNum"];
-				echo '<a href="?controller=sign_in&action=getViewLogout">Logout</a>';
-				echo '<a href="?controller=location&action=getViewLocation">Location</a>';
-				echo '<a href="?controller=rental_history&action=getViewRentalHistory">Rental History</a>';
-				echo '<a href="?controller=comment&action=getViewPostComment">Post Comment</a>';
-				echo '<a href="?controller=comment&action=getViewComment">View Comment</a>';
-				echo '<a href="?controller=car&action=getViewAvailableCars">Available Cars</a>';
+				echo '<a href="?controller=user&action=getViewLogout">Logout</a>';
+				echo '<a href="?controller=user&action=getViewLocation">Location</a>';
+				echo '<a href="?controller=user&action=getViewRentalHistory">Rental History</a>';
+				echo '<a href="?controller=user&action=getViewPostComment">Post Comment</a>';
+				echo '<a href="?controller=user&action=getViewComment">View Comment</a>';
+				echo '<a href="?controller=user&action=getViewAvailableCars">Available Cars</a>';
 				echo '<a href="?controller=user&action=getViewPickUp">Pick Up</a>';
 			} else {
 				echo "not signed in!!";
