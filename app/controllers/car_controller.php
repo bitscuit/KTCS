@@ -18,7 +18,7 @@ class CarController {
                     exit;
                 }
             }
-            require_once("views/pick_up/pick_up.php");
+            require_once("views/comment/view_comment.php");
         } else {
             header("Location: ?controller=error&action=getViewError");
 			exit;

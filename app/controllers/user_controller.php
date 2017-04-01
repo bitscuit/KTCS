@@ -56,7 +56,7 @@ class UserController {
                     exit;
                 }
             }
-            require_once("views/comment/postComment.php");
+            require_once("views/comment/post_comment.php");
         } else {
             header("Location: ?controller=error&action=getViewError");
 			exit;
@@ -87,7 +87,7 @@ class UserController {
                 }
             }
             echo "</table>";
-            require_once("views/comment/ViewComment.php");
+            require_once("views/comment/view_comment.php");
         } else {
             header("Location: ?controller=error&action=getViewError");
 			exit;
