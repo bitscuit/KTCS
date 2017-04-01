@@ -14,7 +14,6 @@
 			break;
 
 			case "user":
-				require_once("models/car.php");
 				require_once("models/comment.php");
 				require_once("models/location.php");
 				require_once("models/pick_up_drop_off.php");
@@ -23,6 +22,12 @@
 				require_once("models/user.php");
 				$controller = new UserController();
 			break;
+
+			case "car":
+				require_once("models/car.php");
+				require_once("models/comment.php");
+				require_once("models/location.php");
+				$controller = new CarController();
 		}
 
 	// call action in the controller
@@ -34,11 +39,11 @@
 	$controllers = array("home" => ["getViewHome"],
 						"error" => ["getViewError"],
 						"user" => ["getViewPickUp", "getViewSignIn",
-						"getViewLogout", "getViewRegister", "getViewLocation",
-						"getViewRentalHistory", "getViewPostComment",
-						"getViewComment", "getViewAvailableCars",
-						"getViewAllCars", "getViewLocationCars",
-						"getViewDropOff"]);
+							"getViewLogout", "getViewRegister", "getViewLocation",
+							"getViewRentalHistory", "getViewPostComment",
+							"getViewComment", "getViewAvailableCars",
+							"getViewAllCars", "getViewLocationCars", "getViewDropOff"],
+						"car" => ["getViewComment", "getViewAvailableCars", "getViewLocationCars", "getViewRentalHistory"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

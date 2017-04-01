@@ -17,7 +17,6 @@
 						<label for="vin" class="col-md-3 control-label">Vin</label>
 						<div class="col-md-9">
 							<select name="vin[]">
-                                <option value=""></option>
                                 <?php
                                     foreach ($vin as $row) {
                                         echo "<option value=" . $row["vin"] . ">" . $row['vin'] . "</option>";
