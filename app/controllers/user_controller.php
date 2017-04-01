@@ -1,5 +1,8 @@
 <?php
 class UserController {
+	
+	public $member;
+	
     public function getViewPickUp() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $vin = Comment::selectVin();
@@ -19,54 +22,6 @@ class UserController {
             header("Location: ?controller=error&action=getViewError");
 			exit;
         }
-    }
-
-    public function getViewAvailableCars() {
-		if (isset($_POST["carsOnDate"])) {
-			$date = $_POST["carsOnDate"];
-			echo $date;
-			$list = Car::getAvailableCars($date);
-				echo "<table>";
-				echo "<tr>";
-				echo "<th>Make</th>";
-				echo "<th>Model</th>";
-				echo "<th>Year</th>";
-				echo "</tr>";
-			if (!empty($list)) {
-				foreach ($list as $row) {
-					echo "<tr>";
-					echo "<td>" . $row["make"] . "</td>";
-					echo "<td>" . $row["model"] . "</td>";
-					echo "<td>" . $row["make_year"] . "</td>";
-					echo "</tr>";
-				}
-			} else {
-				echo "No available cars on this date";
-			}
-			echo "</table>";
-		}
-		// get view to show list of available cars
-		require_once("views/car/available_cars.php");
-    }
-
-    public function getViewLocationCars() {
-        if (isset($_GET["location"])) {
-            $location = $_GET["location"];
-            $list = Car::getLocationCars($location);
-            if (!empty($list)) {
-                foreach ($list as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row['make'] . "</td>";
-                    echo "<td>" . $row['model'] . "</td>";
-                    echo "<td>" . $row['make_year'] . "</td>";
-                    echo "</tr>";
-                }
-            }
-            echo "</table>";
-        } else {
-            echo "No available cars on this date";
-        }
-        require_once("views/car/available_cars.php");
     }
 
     public function getViewPostComment() {
@@ -164,11 +119,15 @@ class UserController {
         }
     }
 
+	// Sign in
     public function getViewSignIn() {
         if(isset($_POST["username"]) && isset($_POST["password"])) {
             $uname = $_POST["username"];
             $pass = $_POST["password"];
-            if (User::signIn($uname, $pass)) {
+			$member = User::signIn($uname, $pass);
+			$_SESSION["username"] = $member->username;
+			$_SESSION["member_num"] = $member->member_num;
+            if ($member != null) {
                 $_SESSION["signIn"] = 1;
 				header("Location: ?controller=home&action=getViewHome");
 				print_r($_SESSION);
@@ -180,6 +139,7 @@ class UserController {
         require_once("views/sign_in/sign_in.php");
     }
 
+	// Log out of session
     public function getViewLogout() {
         session_unset();
         session_destroy();

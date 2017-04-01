@@ -22,11 +22,11 @@
 		<!-- header should have a script to determine which header to show -->
 		<h1>Kingston Town Car Share</h1>
 		<a href="/KTCS/app">Home</a>
-		<a href="?controller=sign_in&action=getViewSignIn">Sign In</a>
-		<a href="?controller=location&action=getViewLocation">Location</a>
-		<a href="?controller=rental_history&action=getViewRentalHistory">Rental History</a>
-		<a href="?controller=comment&action=getViewPostComment">Post Comment</a>
-		<a href="?controller=comment&action=getViewComment">View Comment</a>
+		<a href="?controller=user&action=getViewSignIn">Sign In</a>
+		<a href="?controller=user&action=getViewLocation">Location</a>
+		<a href="?controller=user&action=getViewRentalHistory">Rental History</a>
+		<a href="?controller=user&action=getViewPostComment">Post Comment</a>
+		<a href="?controller=car&action=getViewComment">View Comment</a>
 		<a href="?controller=car&action=getViewAvailableCars">Available Cars</a>
 		<a href="?controller=user&action=getViewPickUp">Pick Up</a>
 
