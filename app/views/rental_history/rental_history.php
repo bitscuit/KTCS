@@ -1,6 +1,8 @@
 <div class="container">
 	<?php
-		$table = "<table class='table'><tr>";
+		$table = "<table class='table'>";
+		$table .= "<thead class='thead-inverse'>";
+		$table .= "<tr>";
 		$table .= "<th>Vin</th>";
 		$table .= "<th>Rent Date</th>";
 		$table .= "<th>Pick Up Reading</th>";
@@ -9,6 +11,8 @@
 		$table .= "<th>Pick Up Time</th>";
 		$table .= "<th>Drop Off Time</th>";
 		$table .= "</tr>";
+		$table .= "</thead>";
+		$table .= "<tbody>";
 		// Data still being returned, builds a table as a string
 		foreach ($history as $row) {
 				$table .= "<tr>";
@@ -21,6 +25,7 @@
 				$table .= "<td> " . $row["drop_off_time"] . " </td>";
 				$table .= "</tr>";
 		}
+		$table .= "</body>";
 		$table .= "</table>";
 		echo $table;
 	?>

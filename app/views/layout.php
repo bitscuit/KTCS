@@ -18,21 +18,13 @@
 	</head>
 
 	<body>
-		<header>
-		<!-- header should have a script to determine which header to show -->
-		<h1>Kingston Town Car Share</h1>
-		<a href="/KTCS/app">Home</a>
-		<a href="?controller=user&action=getViewSignIn">Sign In</a>
-		<a href="?controller=car&action=getViewLocation">Location</a>
-		<a href="?controller=user&action=getViewRentalHistory">Rental History</a>
-		<a href="?controller=user&action=getViewPostComment">Post Comment</a>
-		<a href="?controller=car&action=getViewComment">View Comment</a>
-		<a href="?controller=car&action=getViewAvailableCars">Available Cars</a>
-		<a href="?controller=user&action=getViewPickUp">Pick Up</a>
-		<a href="?controller=user&action=getViewDropOff">Drop Off</a>
-
-		<?php require_once("views/header/header.html");?>
-		</header>
+		<?php
+			if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
+				require_once("views/header/member_header.html");
+			} else {
+				require_once("views/header/user_header.html");
+			}
+		?>
 
 		<!-- route to the appropriate controller and action to display the proper view -->
 		<?php require_once("routes.php"); ?>
