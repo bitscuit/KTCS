@@ -36,7 +36,7 @@ class CarController {
         }
     }
 
-	// shows all KTCS locations 
+	// shows all KTCS locations
     public function getViewLocation() {
 		require_once('views/location/location.php');
         $list = Location::all();
@@ -50,10 +50,10 @@ class CarController {
 
 	// shows all available cars for reservation on specified date
     public function getViewAvailableCars() {
-		if (isset($_POST["carsOnDate"])) {
-			$date = $_POST["carsOnDate"];
-			echo $date;
-			$list = Car::getAvailableCars($date);
+		if (isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+			$startDate = $_POST["startDate"];
+			$endDate = $_POST["endDate"];
+			$list = Car::getAvailableCars($startDate, $endDate);
 				echo "<table>";
 				echo "<tr>";
 				echo "<th>Make</th>";

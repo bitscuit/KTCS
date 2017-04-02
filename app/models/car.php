@@ -24,18 +24,17 @@
 		}
 
 		// retrieves list of avaiable cars available for rental on specified date
-		public static function getAvailableCars($date) {
-			if (!isset($date)) {
-				$date = date("y.m.d");
-			}
+		public static function getAvailableCars($startDate, $endDate) {
 			$db = Db::getInstance();
 			$sql = "SELECT make, model, make_year";
 			$sql .= " FROM car NATURAL JOIN reservation";
-			$sql .= " WHERE reservation_start_date > :date or reservation_end_date < :date";
+			$sql .= " WHERE NOT (reservation_start_date < :startDate AND reservation_end_date > :startDate)";
+			$sql .= " AND NOT (reservation_start_date < :endDate AND reservation_end_date > :endDate)";
 			$req = $db->prepare($sql);
-			$date = new DateTime($date);
-			$date->format('Y-m-d');
-			$req-> bindParam(":date", $date->format('Y-m-d'));
+			$startDate = new DateTime($startDate);
+			$req->bindParam(":startDate", $startDate->format('Y-m-d'));
+			$endDate = new DateTime($endDate);
+			$req->bindParam(":endDate", $endDate->format('Y-m-d'));
 			$req->execute();
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
