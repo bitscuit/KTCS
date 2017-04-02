@@ -36,23 +36,14 @@ class CarController {
     }
 
     public function getViewLocation() {
-		if (isset($_GET["location"])) {
-            $location = $_GET["location"];
-            $list = Car::getLocationCars($location);
-            if (!empty($list)) {
-                foreach ($list as $row) {
-                    echo "<tr>";
-                    echo "<td>" . $row['make'] . "</td>";
-                    echo "<td>" . $row['model'] . "</td>";
-                    echo "<td>" . $row['make_year'] . "</td>";
-                    echo "</tr>";
-                }
-            }
-            echo "</table>";
-        } else {
-            echo "No available cars on this date";
+		require_once('views/location/location.php');
+        $list = Location::all();
+        foreach ($list as $row) {
+            echo "<tr>";
+            echo "<td class='tableData'><a href='?controller=car&action=getViewLocationCars&location=" . $row['parking_address'] . "'>" . $row['parking_address'] . "</a></td>";
+            echo "</tr>";
         }
-        require_once("views/car/available_cars.php");
+        echo "</table>";
     }
 
 	// TODO filter by car
@@ -87,14 +78,27 @@ class CarController {
 
 	// Shows available cars on the current date in a specific location.
     public function getViewLocationCars() {
-         require_once('views/location/location.php');
-        $list = Location::all();
-        foreach ($list as $row) {
-            echo "<tr>";
-            echo "<td class='tableData'><a href='?controller=car&action=getViewLocationCars&location=" . $row['parking_address'] . "'>" . $row['parking_address'] . "</a></td>";
-            echo "</tr>";
+		// require_once("views/car/available_cars.php");
+        if (isset($_GET["location"])) {
+            $location = $_GET["location"];
+            $list = Car::getLocationCars($location);
+			echo $location;
+			echo "<table>";
+            if (!empty($list)) {
+                foreach ($list as $row) {
+                    echo "<tr>";
+                    echo "<td>" . $row['make'] . "</td>";
+                    echo "<td>" . $row['model'] . "</td>";
+                    echo "<td>" . $row['make_year'] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+				echo "test";
+			}
+            echo "</table>";
+        } else {
+            echo "No available cars on this date";
         }
-        echo "</table>";
     }
 
 	// Admin function
