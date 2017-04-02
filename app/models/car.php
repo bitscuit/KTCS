@@ -28,8 +28,8 @@
 			$db = Db::getInstance();
 			$sql = "SELECT make, model, make_year";
 			$sql .= " FROM car NATURAL JOIN reservation";
-			$sql .= " WHERE NOT (reservation_start_date < :startDate AND reservation_end_date > :startDate)";
-			$sql .= " AND NOT (reservation_start_date < :endDate AND reservation_end_date > :endDate)";
+			$sql .= " WHERE NOT (reservation_start_date <= :startDate AND reservation_end_date >= :startDate)";
+			$sql .= " AND NOT (reservation_start_date <= :endDate AND reservation_end_date >= :endDate)";
 			$req = $db->prepare($sql);
 			$startDate = new DateTime($startDate);
 			$req->bindParam(":startDate", $startDate->format('Y-m-d'));
