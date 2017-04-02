@@ -1,8 +1,11 @@
 <?php
+// controller to handle user specific actions
 class UserController {
-
+	
+	// object that is returned when the user has signed in
 	public $member;
-
+	
+	// show the pick form and send pick up form data to database
     public function getViewPickUp() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $vin = Comment::selectVin();
@@ -20,7 +23,8 @@ class UserController {
 			exit;
         }
     }
-
+	
+	// show the drop off form and send drop off form data to database
     public function getViewDropOff() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $vin = Comment::selectVin();
@@ -42,7 +46,9 @@ class UserController {
 			exit;
         }
     }
-
+	
+	// show the view that allows member to post comment
+	// retrieve comment data and send to database
     public function getViewPostComment() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $list = Comment::selectVin();
@@ -68,6 +74,7 @@ class UserController {
 
     }
 
+	// show the register view and send registration data to database
     public function getViewRegister() {
         if(isset($_POST["username"]) && isset($_POST["password"]) &&
             isset($_POST["first_name"]) && isset($_POST["last_name"]) &&
@@ -91,6 +98,7 @@ class UserController {
         require_once("views/register/register.php");
     }
 
+	// show the member's rental history
     public function getViewRentalHistory() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $history = RentalHistory::selectHistory($_SESSION["memberNum"]);
@@ -101,7 +109,7 @@ class UserController {
         }
     }
 
-	// Sign in
+	// show the sign in form and send sign in data to database
     public function getViewSignIn() {
         if(isset($_POST["username"]) && isset($_POST["password"])) {
             $uname = $_POST["username"];
@@ -121,7 +129,7 @@ class UserController {
         require_once("views/sign_in/sign_in.php");
     }
 
-	// Log out of session
+	// log out of session
     public function getViewLogout() {
         session_unset();
         session_destroy();

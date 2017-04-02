@@ -9,7 +9,6 @@
 		$controller = "home";
 		$action     = "getViewHome";
 	}
-	$temp = "";
 	// show the view
 	require_once("views/layout.php");
 ?>

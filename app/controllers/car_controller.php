@@ -1,9 +1,10 @@
 <?php
+// controller to handle car data
 class CarController {
 
 	public $car;
 
-	// Returns all comments for a specific car.
+	// shows all comments for a specified car
 	public function getViewComment() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $vin = Comment::selectVin();
@@ -35,6 +36,7 @@ class CarController {
         }
     }
 
+	// shows all KTCS locations 
     public function getViewLocation() {
 		require_once('views/location/location.php');
         $list = Location::all();
@@ -46,8 +48,7 @@ class CarController {
         echo "</table>";
     }
 
-	// TODO filter by car
-	// Get available cars on specified date.
+	// shows all available cars for reservation on specified date
     public function getViewAvailableCars() {
 		if (isset($_POST["carsOnDate"])) {
 			$date = $_POST["carsOnDate"];
@@ -76,7 +77,7 @@ class CarController {
 		require_once("views/car/available_cars.php");
     }
 
-	// Shows available cars on the current date in a specific location.
+	// show all currently available cars in the specified location
     public function getViewLocationCars() {
 		// require_once("views/car/available_cars.php");
         if (isset($_GET["location"])) {
@@ -102,8 +103,7 @@ class CarController {
     }
 
 	// Admin function
-	// Gets the rental history for a specific car.
-	// TODO query based on time range
+	// show rental history for specified car
     public function getViewRentalHistory() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $history = RentalHistory::selectHistory($_SESSION["memberNum"]);
