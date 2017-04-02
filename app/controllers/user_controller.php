@@ -99,6 +99,17 @@ class UserController {
     }
 
 	// show the member's rental history
+    public function getViewReservation() {
+        if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
+            $history = Reservation::insertReservation($_SESSION["memberNum"]);
+    		require_once('views/reservation/reservation.php');
+        } else {
+            header("Location: ?controller=error&action=getViewError");
+			exit;
+        }
+    }
+	
+	// show the member's rental history
     public function getViewRentalHistory() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $history = RentalHistory::selectHistory($_SESSION["memberNum"]);

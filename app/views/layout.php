@@ -18,20 +18,22 @@
 	</head>
 
 	<body>
-		<?php
-			if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-				require_once("views/header/member_header.html");
-			} else {
-				require_once("views/header/user_header.html");
-			}
-		?>
+		<div class="container-fluid">
+			<?php
+				if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
+					require_once("views/header/member_header.html");
+				} else {
+					require_once("views/header/user_header.html");
+				}
+			?>
 
-		<!-- route to the appropriate controller and action to display the proper view -->
-		<?php require_once("routes.php"); ?>
+			<!-- route to the appropriate controller and action to display the proper view -->
+			<?php require_once("routes.php"); ?>
 
-		<footer>
-		<!-- footer will have script to determine which footer to show -->
-		Copyright
-		</footer>
+			<footer>
+			<!-- footer will have script to determine which footer to show -->
+			Copyright
+			</footer>
+		</div>
 	<body>
 <html>

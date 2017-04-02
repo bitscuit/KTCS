@@ -17,12 +17,12 @@
 			$this->end_date 		= $end_date;
 		}
 
-		public static function insertReservation($reservation_num, $vin, $start_date, $access_code, $end_date) {
+		public static function insertReservation($vin, $start_date, $access_code, $end_date) {
 			$list = [];
 			$db = Db::getInstance();
 			$sql = 	"INSERT INTO reservation";
-			$sql .= " (member_num, vin, reservation_start_date, access_code, reservation_end_date)";
-			$sql .= " VALUES (:member_num, :vin, :start_date, :access_code, :end_date)";
+			$sql .= " (reservation_num, member_num, vin, reservation_start_date, access_code, reservation_end_date)";
+			$sql .= " VALUES (DEFAULT, :member_num, :vin, :start_date, :access_code, :end_date)";
 			$req = $db->prepare($sql);
 			$req->bindParam(":member_num", 	$_SESSION["memberNum"]);
 			$req->bindParam(":vin", 		$vin);
@@ -32,5 +32,5 @@
 			$req->execute();
 			$member = $req->fetch();
 		} // end insertReservation function
-	} // end User class
+	} // end Reservation class
 ?>
