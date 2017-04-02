@@ -53,5 +53,27 @@
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
 		}
+
+		public static function selectInfo($vin) {
+			$list = [];
+			$db = Db::getInstance();
+			$sql = "SELECT * FROM car WHERE vin = :vin";
+			$req = $db->prepare($sql);
+			$req->bindParam(":vin", $vin);
+			$req->execute();
+			$list = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $list;
+		}
+
+		public static function selectCarComments($vin) {
+			$list = [];
+			$db = Db::getInstance();
+			$sql = "SELECT rating, comment_text, comment_time FROM comment WHERE vin = :vin";
+			$req = $db->prepare($sql);
+			$req->bindParam(":vin", $vin);
+			$req->execute();
+			$list = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $list;
+		}
 	}
 ?>

@@ -114,5 +114,16 @@ class CarController {
         }
     }
 
+	public function getViewCar() {
+		if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
+            $carInfo = Car::selectInfo($_GET["vin"]);
+			$carComment = Car::selectCarComments($_GET["vin"]);
+    		require_once('views/car/car_profile.php');
+        } else {
+            header("Location: ?controller=error&action=getViewError");
+			exit;
+        }
+	}
+
 } // end CarController class
 ?>
