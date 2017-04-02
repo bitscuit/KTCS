@@ -1,7 +1,6 @@
-<!-- view for the sign-in form -->
 <div class="container">
 	<?php
-		$table = "<table border=1><tr>";
+		$table = "<table class='table'><tr>";
 		$table .= "<th>Vin</th>";
 		$table .= "<th>Rent Date</th>";
 		$table .= "<th>Pick Up Reading</th>";

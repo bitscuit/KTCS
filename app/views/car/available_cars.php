@@ -15,7 +15,7 @@
 
 					<!-- pick date -->
                     <div class="form-group">
-						<label for="carsOnDate" class="col-md-3 control-label">Rating</label>
+						<label for="carsOnDate" class="col-md-3 control-label">End Date</label>
 						<div class="col-md-9">
 							<input type="date" name="carsOnDate">
 						</div>
