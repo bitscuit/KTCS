@@ -64,5 +64,15 @@
 				return false;
 			}
 		}
+
+		public static function listComments($memberNum) {
+			$db = Db::getInstance();
+			$sql = "SELECT vin, rating, comment_text, comment_time FROM comment WHERE member_num = :member_num";
+			$req = $db->prepare($sql);
+			$req->bindParam(":member_num", $memberNum);
+			$req->execute();
+			$comments = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $comments;
+		}
 	} // end User class
 ?>

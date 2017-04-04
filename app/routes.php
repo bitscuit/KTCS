@@ -41,7 +41,7 @@
 						"user" => ["getViewPickUp", "getViewSignIn",
 							"getViewLogout", "getViewRegister", "getViewLocation",
 							"getViewRentalHistory", "getViewPostComment",
-							"getViewComment", "getViewAvailableCars",
+							"getViewUserComments", "getViewAvailableCars",
 							"getViewAllCars", "getViewLocationCars",
 							"getViewDropOff", "getViewMember"],
 						"car" => ["getViewComment", "getViewLocation",

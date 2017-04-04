@@ -6,34 +6,29 @@ class CarController {
 
 	// shows all comments for a specified car
 	public function getViewComment() {
-        if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-            $vin = Comment::selectVin();
-            echo "<table>
-                <tr>
-                    <th>Vin</th>
-                    <th>Rating</th>
-                    <th>Comment Text</th>
-                    <th>Comment Time</th>
-                </tr>";
-            if(isset($_POST["rating"]) && isset($_POST["vin"])) {
-                $list = Comment::selectComment($_POST["vin"][0], $_POST["rating"][0]);
-                if ($list != null) {
-                    foreach ($list as $row) {
-                        echo "<tr>";
-                        echo "<td>" . $row["vin"] . "</td>";
-                        echo "<td>" . $row["rating"] . "</td>";
-                        echo "<td>" . $row["comment_text"] . "</td>";
-                        echo "<td>" . $row["comment_time"] . "</td>";
-                        echo "</tr>";
-                    }
+        $vin = Comment::selectVin();
+        echo "<table>
+            <tr>
+                <th>Vin</th>
+                <th>Rating</th>
+                <th>Comment Text</th>
+                <th>Comment Time</th>
+            </tr>";
+        if(isset($_POST["rating"]) && isset($_POST["vin"])) {
+            $list = Comment::selectComment($_POST["vin"][0], $_POST["rating"][0]);
+            if ($list != null) {
+                foreach ($list as $row) {
+                    echo "<tr>";
+                    echo "<td>" . $row["vin"] . "</td>";
+                    echo "<td>" . $row["rating"] . "</td>";
+                    echo "<td>" . $row["comment_text"] . "</td>";
+                    echo "<td>" . $row["comment_time"] . "</td>";
+                    echo "</tr>";
                 }
             }
-            echo "</table>";
-            require_once("views/comment/view_comment.php");
-        } else {
-            header("Location: ?controller=error&action=getViewError");
-			exit;
         }
+        echo "</table>";
+        require_once("views/comment/view_comment.php");
     }
 
 	// shows all KTCS locations

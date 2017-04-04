@@ -158,5 +158,16 @@ class UserController {
 		}
 		require_once("views/member/member.php");
 	}
+
+	public function getViewUserComments() {
+		if(isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
+			$memberNum = $_SESSION["memberNum"];
+			$comments = User::listComments($memberNum);
+		} else {
+			header("Location: ?controller=error&action=error");
+			exit;
+		}
+		require_once("views/member/comments.php");
+	}
 } // end UserController class
 ?>
