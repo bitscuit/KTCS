@@ -11,15 +11,16 @@
 		public $username;
 		public $password;
 
-		public function __construct($member_num, $username) {
+		public function __construct($member_num, $username, $role) {
 			$this->member_num     = $member_num;
 			$this->username       = $username;
+			$this->role = $role;
 		}
 
 		public static function signIn($uname, $pass) {
 			$list = [];
 			$db = Db::getInstance();
-			$sql = "SELECT username, password, member_num FROM member";
+			$sql = "SELECT username, password, member_num, role FROM member";
 			$sql .= " WHERE username = :username";
 			$sql .= " AND password = :password";
 			$req = $db->prepare($sql);
@@ -30,7 +31,7 @@
 			// Checks to see that user exists. Returns true if so. False otherwise.
 			if ($member != null) {
 				$_SESSION["memberNum"] = $member["member_num"];
-				return new User($member["member_num"], $uname);
+				return new User($member["member_num"], $uname, $member["role"]);
 			} else {
 				return null;
 			}

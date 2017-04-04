@@ -129,12 +129,20 @@ class UserController {
 			$_SESSION["username"] = $member->username;
 			$_SESSION["member_num"] = $member->member_num;
             if ($member != null) {
-                $_SESSION["signIn"] = 1;
-				header("Location: ?controller=user&action=getViewMember");
-				print_r($_SESSION);
+				if ($member->role == "User") {
+					$_SESSION["signIn"] = 1;
+					header("Location: ?controller=user&action=getViewMember");
+				} else if ($member->role == "Admin") {
+					$_SESSION["adminSignIn"] = 1;
+					header("Location: ?controller=admin&action=getViewAdmin");
+				} else {
+					$_SESSION["signIn"] = 0;
+					$_SESSION["adminSignIn"] = 0;
+				}
                 exit;
             } else {
 				$_SESSION["signIn"] = 0;
+				$_SESSION["adminSignIn"] = 0;
 			}
         }
         require_once("views/sign_in/sign_in.php");
