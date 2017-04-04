@@ -22,6 +22,8 @@
 			<?php
 				if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
 					require_once("views/header/member_header.html");
+				} else if (isset($_SESSION["adminSignIn"]) && $_SESSION["adminSignIn"] == 1)  {
+					require_once("views/header/admin_header.html");
 				} else {
 					require_once("views/header/user_header.html");
 				}

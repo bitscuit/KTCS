@@ -22,7 +22,7 @@
 		public static function getAllCars() {
 
 		}
-		
+
 		// retrieves list of the car makes
 		public static function getMake() {
 			$db = Db::getInstance();
@@ -84,6 +84,20 @@
 			$req->execute();
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
+		}
+
+		public static function addCar($vin, $parkingAddress, $make, $model, $makeYear, $dailyRentalFee) {
+			$db = Db::getInstance();
+			$sql = "INSERT INTO car (vin, parking_address, make, model, make_year, daily_rental_fee) VALUES (:vin, :parking_address, :make, :model, :make_year, :daily_rental_fee)";
+			$req = $db->prepare($sql);
+			$req->bindParam(":vin", $vin);
+			$req->bindParam(":parking_address", $parkingAddress);
+			$req->bindParam(":make", $make);
+			$req->bindParam(":model", $model);
+			$req->bindParam(":make_year", $makeYear);
+			$req->bindParam(":daily_rental_fee", $dailyRentalFee);
+			$success = $req->execute();
+			return $success;
 		}
 	}
 ?>

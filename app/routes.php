@@ -28,6 +28,21 @@
 				require_once("models/comment.php");
 				require_once("models/location.php");
 				$controller = new CarController();
+			break;
+
+			case "admin":
+				require_once("models/comment.php");
+				require_once("models/location.php");
+				require_once("models/pick_up_drop_off.php");
+				require_once("models/rental_history.php");
+				require_once("models/reservation.php");
+				require_once("models/user.php");
+				require_once("models/car.php");
+				require_once("models/comment.php");
+				require_once("models/location.php");
+				$controller = new AdminController();
+			break;
+
 		}
 
 	// call action in the controller
@@ -46,7 +61,8 @@
 							"getViewDropOff", "getViewMember"],
 						"car" => ["getViewComment", "getViewLocation",
 								"getViewAvailableCars", "getViewLocationCars",
-								"getViewRentalHistory", "getViewCar"]);
+								"getViewRentalHistory", "getViewCar"],
+						"admin" => ["getViewAdmin", "getViewAddCar"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page
