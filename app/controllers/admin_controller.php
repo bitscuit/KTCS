@@ -13,5 +13,16 @@ class AdminController {
         }
         require_once("views/admin/add_car.php");
     }
+
+    public function getViewRentalHistory() {
+        $vin = Comment::selectVin();
+        if (isset($_POST["vin"])) {
+            $result = RentalHistory::selectCarHistory($_POST["vin"][0]);
+            if (!$result) {
+                echo "No rental history";
+            }
+        }
+        require_once("views/admin/rental_history.php");
+    }
 }
 ?>
