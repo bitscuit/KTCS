@@ -22,6 +22,17 @@ class RentalHistory {
 		$this->drop_off_time = $drop_off_time;
 	}
 
+	public static function selectDamaged() {
+		$db = Db::getInstance();
+		$sql = "SELECT * FROM rental_history WHERE status = 'Damaged' OR status = 'Damaged'";
+		$req = $db->prepare($sql);
+        $req->execute();
+		$damaged = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        //returns list of history
+        return $damaged;
+	}
+
 	// Select specific car's rental history.
     public static function selectCarHistory($vin) {
         $list = [];

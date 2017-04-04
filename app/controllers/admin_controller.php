@@ -24,5 +24,13 @@ class AdminController {
         }
         require_once("views/admin/rental_history.php");
     }
+
+    public function getViewDamaged() {
+        $result = RentalHistory::selectDamaged();
+        if (!$result) {
+            echo "No cars damaged";
+        }
+        require_once("views/admin/damaged.php");
+    }
 }
 ?>
