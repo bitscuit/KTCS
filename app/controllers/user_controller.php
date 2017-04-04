@@ -1,10 +1,10 @@
 <?php
 // controller to handle user specific actions
 class UserController {
-	
+
 	// object that is returned when the user has signed in
 	public $member;
-	
+
 	// show the pick form and send pick up form data to database
     public function getViewPickUp() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
@@ -23,7 +23,7 @@ class UserController {
 			exit;
         }
     }
-	
+
 	// show the drop off form and send drop off form data to database
     public function getViewDropOff() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
@@ -46,7 +46,7 @@ class UserController {
 			exit;
         }
     }
-	
+
 	// show the view that allows member to post comment
 	// retrieve comment data and send to database
     public function getViewPostComment() {
@@ -108,7 +108,7 @@ class UserController {
 			exit;
         }
     }
-	
+
 	// show the member's rental history
     public function getViewRentalHistory() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
@@ -130,7 +130,7 @@ class UserController {
 			$_SESSION["member_num"] = $member->member_num;
             if ($member != null) {
                 $_SESSION["signIn"] = 1;
-				header("Location: ?controller=home&action=getViewHome");
+				header("Location: ?controller=user&action=getViewMember");
 				print_r($_SESSION);
                 exit;
             } else {
@@ -147,5 +147,16 @@ class UserController {
         header("Location: ?controller=home&action=getViewHome");
         exit;
     }
+
+	public function getViewMember() {
+		if(isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
+			$memberNum = $_SESSION["memberNum"];
+			$reservations = Reservation::listReservations($memberNum);
+		} else {
+			header("Location: ?controller=error&action=error");
+			exit;
+		}
+		require_once("views/member/member.php");
+	}
 } // end UserController class
 ?>

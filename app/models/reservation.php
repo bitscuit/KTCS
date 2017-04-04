@@ -32,5 +32,15 @@
 			$req->execute();
 			$member = $req->fetch();
 		} // end insertReservation function
+
+		public static function listReservations($memberNum) {
+			$db = Db::getInstance();
+			$sql = 	"SELECT vin, reservation_start_date, reservation_end_date, access_code FROM reservation WHERE member_num = :member_num";
+			$req = $db->prepare($sql);
+			$req->bindParam(":member_num", 	$_SESSION["memberNum"]);
+			$req->execute();
+			$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $reservations;
+		}
 	} // end Reservation class
 ?>

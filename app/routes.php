@@ -42,7 +42,8 @@
 							"getViewLogout", "getViewRegister", "getViewLocation",
 							"getViewRentalHistory", "getViewPostComment",
 							"getViewComment", "getViewAvailableCars",
-							"getViewAllCars", "getViewLocationCars", "getViewDropOff"],
+							"getViewAllCars", "getViewLocationCars",
+							"getViewDropOff", "getViewMember"],
 						"car" => ["getViewComment", "getViewLocation",
 								"getViewAvailableCars", "getViewLocationCars",
 								"getViewRentalHistory", "getViewCar"]);
