@@ -54,12 +54,13 @@ class CarController {
 			$startDate = $_POST["startDate"];
 			$endDate = $_POST["endDate"];
 			$list = Car::getAvailableCars($startDate, $endDate);
-				echo "<table>";
-				echo "<tr>";
-				echo "<th>Make</th>";
-				echo "<th>Model</th>";
-				echo "<th>Year</th>";
-				echo "</tr>";
+			$make = Car::getMake();
+			echo "<table>";
+			echo "<tr>";
+			echo "<th>Make</th>";
+			echo "<th>Model</th>";
+			echo "<th>Year</th>";
+			echo "</tr>";
 			if (!empty($list)) {
 				foreach ($list as $row) {
 					echo "<tr>";

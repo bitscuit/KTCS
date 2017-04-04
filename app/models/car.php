@@ -22,6 +22,16 @@
 		public static function getAllCars() {
 
 		}
+		
+		// retrieves list of the car makes
+		public static function getMake() {
+			$db = Db::getInstance();
+			$sql = "SELECT make FROM car";
+			$req = $db->prepare($sql);
+			$req->execute();
+			$list = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $make;
+		}
 
 		// retrieves list of avaiable cars available for rental on specified date
 		public static function getAvailableCars($startDate, $endDate) {
