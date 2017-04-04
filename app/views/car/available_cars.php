@@ -14,10 +14,15 @@
 			<input type="date" name="endDate">
 		</div>
 
-		<!-- pick  start date -->
 		<label for="make" class="col-md-1 control-label">Make</label>
 		<div class="col-md-2">
-			<input type="text" name="make">
+			<select name="make[]">
+				<?php
+					foreach ($make as $row) {
+						echo "<option value=" . $row['make'] . ">" . $row['make'] . "</option>";
+					}
+				?>
+			</select>
 		</div>
 
 		<!-- pick end date -->
