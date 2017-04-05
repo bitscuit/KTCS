@@ -24,6 +24,29 @@
             }
         ?>
     </table>
+<h2>Post Comment</h2>
+    <form id="registerform" class="form-horizontal" role="form" action="" method="POST">
+       <div class="row">
+           <label for="rating" class="col-md-1 control-label">Rating</label>
+           <div class="col-md-2">
+               <select name="rating">
+                   <option value="4">4</option>
+                   <option value="3">3</option>
+                   <option value="2">2</option>
+                   <option value="1">1</option>
+               </select>
+           </div>
+
+            <label for="comment" class="col-md-1 control-label">Comment</label>
+            <div class="col-md-2">
+                <input type="text" name="comment">
+            </div>
+
+            <div class="row" style="text-align:center;">
+        		<input type="submit" class="btn btn-info" id="btn-login">
+        	</div>
+        </div>
+    </form>
 <h2>Car Comments</h2>
     <table>
         <tr>

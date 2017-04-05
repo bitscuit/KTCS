@@ -50,7 +50,7 @@ class CarController {
 		$year = Car::getYear();
 		$rentalFee = Car::getDailyRentalFee();
 		$location = Car::getLocation();
-		
+
 		$startDate = "";
 		$endDate = "";
 		$loc = "";
@@ -61,14 +61,14 @@ class CarController {
 		$mdlVal = "";
 		$mkYear = "";
 		$mkYearVal = "";
-		
+
 		// If the start date is the blank option, make the value the current date
 		if (isset($_POST["startDate"])) {
 			$startDate = $_POST["startDate"];
 		} else {
 			$startDate = date('Y-m-d');
 		}
-		
+
 		// If the start date is the blank option, make a blank query "loc" and value "locVal"
 		if (isset($_POST["endDate"])) {
 			$endDate = $_POST["endDate"];
@@ -76,7 +76,7 @@ class CarController {
 			$tempDate = strtotime($startDate . " +7 days");
 			$endDate = date('Y/m/d', $tempDate);
 		}
-		
+
 		// If the location is the blank option, make a blank query "loc" and value "locVal"
 		if (isset($_POST["location"])) {
 			if ($_POST["location"][0] != "") {
@@ -98,7 +98,7 @@ class CarController {
 				$mk = "";
 			}
 		}
-		
+
 		// If the model is the blank option, make a blank query "mdl" and value "mdlVal"
 		if (isset($_POST["model"])) {
 			if ($_POST["model"][0] != "") {
@@ -109,7 +109,7 @@ class CarController {
 				$mdlVal = "";
 			}
 		}
-		
+
 		// If the year is the blank option, make a blank query "mkYear" and value "mkYearVal"
 		if (isset($_POST["year"])) {
 			if ($_POST["year"][0] != "") {
@@ -120,7 +120,7 @@ class CarController {
 				$mkYearVal = "";
 			}
 		}
-		
+
 		// get view to show list of available cars
 		$list = Car::getAvailableCars($startDate, $endDate, $mk, $mkVal, $mdl, $mdlVal, $mkYear, $mkYearVal, $loc, $locVal);
 		require_once("views/car/available_cars.php");
@@ -167,6 +167,14 @@ class CarController {
 		if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $carInfo = Car::selectInfo($_GET["vin"]);
 			$carComment = Car::selectCarComments($_GET["vin"]);
+			if (isset($_POST["rating"]) && isset($_POST["comment"])) {
+				$result = Comment::insertComment($_POST["rating"], $_POST["comment"], $_GET["vin"]);
+				if ($result) {
+					echo "Comment submitted!";
+				} else {
+					echo "Error";
+				}
+			}
     		require_once('views/car/car_profile.php');
         } else {
             header("Location: ?controller=error&action=getViewError");
