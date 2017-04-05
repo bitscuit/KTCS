@@ -47,28 +47,6 @@ class UserController {
         }
     }
 
-	// show the view that allows member to post comment
-	// retrieve comment data and send to database
-    public function getViewPostComment() {
-        if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-            $list = Comment::selectVin();
-            if(isset($_POST["rating"]) && isset($_POST["commentText"])) {
-                $rating = $_POST["rating"][0];
-                $commentText = $_POST["commentText"];
-                $vin = $_POST["vin"][0];
-                echo $rating . $commentText . $_POST["vin"][0] . $_SESSION["memberNum"];
-                if (Comment::insertComment($rating, $commentText, $vin)) {
-                    header("Location: ?controller=home&action=getViewHome");
-                    exit;
-                }
-            }
-            require_once("views/comment/post_comment.php");
-        } else {
-            header("Location: ?controller=error&action=getViewError");
-			exit;
-        }
-    }
-
     // Get the members comments
     public function getViewComment() {
 

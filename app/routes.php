@@ -55,7 +55,7 @@
 						"error" => ["getViewError"],
 						"user" => ["getViewPickUp", "getViewSignIn",
 							"getViewLogout", "getViewRegister", "getViewLocation",
-							"getViewRentalHistory", "getViewPostComment",
+							"getViewRentalHistory",
 							"getViewUserComments", "getViewAvailableCars",
 							"getViewAllCars", "getViewLocationCars",
 							"getViewDropOff", "getViewMember"],
