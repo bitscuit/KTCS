@@ -32,5 +32,13 @@ class AdminController {
         }
         require_once("views/admin/damaged.php");
     }
+
+    public function getViewReservations() {
+        $result = Reservation::reservationsToday();
+        if (!$result) {
+            echo "No reservations today!";
+        }
+        require_once("views/admin/reservations.php");
+    }
 }
 ?>

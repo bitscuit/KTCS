@@ -42,5 +42,14 @@
 			$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $reservations;
 		}
+
+		public static function reservationsToday() {
+			$db = Db::getInstance();
+			$sql = 	"SELECT vin, reservation_start_date, reservation_end_date, access_code FROM reservation WHERE reservation_start_date = CURDATE()";
+			$req = $db->prepare($sql);
+			$req->execute();
+			$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $reservations;
+		}
 	} // end Reservation class
 ?>
