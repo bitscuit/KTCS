@@ -88,7 +88,6 @@ class UserController {
             $license_num = $_POST["license_num"];
             if (User::register($fName, $lName, $phoneNum, $email, $license_num,
                     $username, $password)) {
-                echo "932244444444587859824935734275";
                 header("Location: ?controller=home&action=getViewHome");
                 exit;
             }

@@ -10,7 +10,11 @@ html {
     margin-right: auto;
 }
 
-.table, .tableHeader, .tableData {
+.table {
+	 class: table;
+}
+
+.tableHeader, .tableData {
     border: 1px solid black;
 }
 
@@ -21,3 +25,8 @@ html {
 .tableData, .tableHeader {
     padding: 15px;
 }
+
+.ul, .li { 
+	display: inline; 
+}
+

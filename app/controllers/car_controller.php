@@ -45,31 +45,84 @@ class CarController {
 
 	// shows all available cars for reservation on specified date
     public function getViewAvailableCars() {
-		if (isset($_POST["startDate"]) && isset($_POST["endDate"])) {
+		$make = Car::getMake();
+		$model = Car::getModel();
+		$year = Car::getYear();
+		$rentalFee = Car::getDailyRentalFee();
+		$location = Car::getLocation();
+		
+		$startDate = "";
+		$endDate = "";
+		$loc = "";
+		$locVal = "";
+		$mk = "";
+		$mkVal = "";
+		$mdl = "";
+		$mdlVal = "";
+		$mkYear = "";
+		$mkYearVal = "";
+		
+		// If the start date is the blank option, make the value the current date
+		if (isset($_POST["startDate"])) {
 			$startDate = $_POST["startDate"];
-			$endDate = $_POST["endDate"];
-			$list = Car::getAvailableCars($startDate, $endDate);
-			$make = Car::getMake();
-			echo "<table>";
-			echo "<tr>";
-			echo "<th>Make</th>";
-			echo "<th>Model</th>";
-			echo "<th>Year</th>";
-			echo "</tr>";
-			if (!empty($list)) {
-				foreach ($list as $row) {
-					echo "<tr>";
-					echo "<td>" . $row["make"] . "</td>";
-					echo "<td>" . $row["model"] . "</td>";
-					echo "<td>" . $row["make_year"] . "</td>";
-					echo "</tr>";
-				}
-			} else {
-				echo "No available cars on this date";
-			}
-			echo "</table>";
+		} else {
+			$startDate = date('Y-m-d');
 		}
+		
+		// If the start date is the blank option, make a blank query "loc" and value "locVal"
+		if (isset($_POST["endDate"])) {
+			$endDate = $_POST["endDate"];
+		} else {
+			$tempDate = strtotime($startDate . " +7 days");
+			$endDate = date('Y/m/d', $tempDate);
+		}
+		
+		// If the location is the blank option, make a blank query "loc" and value "locVal"
+		if (isset($_POST["location"])) {
+			if ($_POST["location"][0] != "") {
+				$loc = "AND parking_address = :location";
+				$locVal = $_POST["location"][0];
+			} else {
+				$loc = "";
+				$locVal = "";
+			}
+		}
+
+		// If the make is the blank option, make a blank query "mk" and value "mkVal"
+		if (isset($_POST["make"])) {
+			if ($_POST["make"][0] != "") {
+				$mk = "AND make = :make";
+				$mkVal = $_POST["make"][0];
+			} else {
+				$mkVal = "";
+				$mk = "";
+			}
+		}
+		
+		// If the model is the blank option, make a blank query "mdl" and value "mdlVal"
+		if (isset($_POST["model"])) {
+			if ($_POST["model"][0] != "") {
+				$mdl = "AND model = :model";
+				$mdlVal = $_POST["model"][0];
+			} else {
+				$mdl = "";
+				$mdlVal = "";
+			}
+		}
+		
+		// If the year is the blank option, make a blank query "mkYear" and value "mkYearVal"
+		if (isset($_POST["year"])) {
+			if ($_POST["year"][0] != "") {
+				$mkYear = "AND make_year = :year";
+				$mkYearVal = $_POST["year"][0];
+			} else {
+				$mkYear = "";
+				$mkYearVal = "";
+			}
+		}
+		
 		// get view to show list of available cars
+		$list = Car::getAvailableCars($startDate, $endDate, $mk, $mkVal, $mdl, $mdlVal, $mkYear, $mkYearVal, $loc, $locVal);
 		require_once("views/car/available_cars.php");
     }
 
