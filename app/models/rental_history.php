@@ -62,5 +62,16 @@ class RentalHistory {
         // Checks to see that user exists. Returns true if so. False otherwise.
         return $history;
     }
+
+	public static function needsMaintenance() {
+		$db = Db::getInstance();
+		$sql = 	"SELECT vin, maintenance_date, odometer_reading, pick_up_odometer_reading
+				FROM rental_history NATURAL JOIN car_maintenance_history
+				WHERE (pick_up_odometer_reading - odometer_reading) > 5000";
+		$req = $db->prepare($sql);
+		$req->execute();
+		$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
+		return $reservations;
+	}
 } // end User class
 ?>

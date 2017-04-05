@@ -46,5 +46,13 @@ class AdminController {
         $result2 = Reservation::maxMinReservations(false);
         require_once("views/admin/max_min_reservations.php");
     }
+
+    public function getViewNeedsMaintenance() {
+        $result = RentalHistory::needsMaintenance();
+        if (!$result) {
+            echo "No cars need maintenance!";
+        }
+        require_once("views/admin/maintenance.php");
+    }
 }
 ?>

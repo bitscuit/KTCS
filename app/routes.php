@@ -64,7 +64,8 @@
 								"getViewRentalHistory", "getViewCar"],
 						"admin" => ["getViewAdmin", "getViewAddCar",
 							"getViewRentalHistory", "getViewDamaged",
-							"getViewReservations", "getViewMaxMinReservations"]);
+							"getViewReservations", "getViewMaxMinReservations",
+							"getViewNeedsMaintenance"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page
