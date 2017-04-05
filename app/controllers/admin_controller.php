@@ -40,5 +40,11 @@ class AdminController {
         }
         require_once("views/admin/reservations.php");
     }
+
+    public function getViewMaxMinReservations() {
+        $result1 = Reservation::maxMinReservations(true);
+        $result2 = Reservation::maxMinReservations(false);
+        require_once("views/admin/max_min_reservations.php");
+    }
 }
 ?>

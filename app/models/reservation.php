@@ -51,5 +51,44 @@
 			$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $reservations;
 		}
+
+		public static function maxMinReservations($flag) {
+			$db = Db::getInstance();
+			if ($flag) {
+				$sql = 	"SELECT vin AS vin_max, MAX(a) AS max_reservations
+					 FROM (
+						 SELECT vin, COUNT(*) AS a
+						 FROM rental_history
+						 GROUP BY vin
+					 ) AS countTable
+					 WHERE a = (
+						 SELECT MAX(a)
+						 FROM (
+							 SELECT vin, COUNT(*) AS a
+							 FROM rental_history
+							 GROUP BY vin
+						 ) countTable
+					 )";
+			} else {
+				$sql = 	"SELECT vin AS vin_min, MIN(a) AS min_reservations
+					 FROM (
+						 SELECT vin, COUNT(*) AS a
+						 FROM rental_history
+						 GROUP BY vin
+					 ) AS countTable
+					 WHERE a = (
+						 SELECT MIN(a)
+						 FROM (
+							 SELECT vin, COUNT(*) AS a
+							 FROM rental_history
+							 GROUP BY vin
+						 ) countTable
+					 )";
+			}
+			$req = $db->prepare($sql);
+			$req->execute();
+			$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $reservations;
+		}
 	} // end Reservation class
 ?>
