@@ -65,5 +65,10 @@ class AdminController {
         }
         require_once("views/admin/available_cars.php");
     }
+
+    public function getViewAdmin() {
+        require_once("views/admin/home.php");
+        echo "Welcome " . $_SESSION["username"] . "!";
+    }
 }
 ?>

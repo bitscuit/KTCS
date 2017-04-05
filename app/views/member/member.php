@@ -1,4 +1,3 @@
-<h1>Hello</h1>
 <table>
     <tr>
         <th>Vin</th>

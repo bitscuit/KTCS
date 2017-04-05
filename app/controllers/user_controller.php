@@ -136,6 +136,8 @@ class UserController {
 	public function getViewMember() {
 		if(isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
 			$memberNum = $_SESSION["memberNum"];
+			echo "<h1>Member Home</h1>";
+			echo "<h3>Welcome " . $_SESSION["username"] . "!</h3>";
 			$reservations = Reservation::listReservations($memberNum);
 		} else {
 			header("Location: ?controller=error&action=error");
