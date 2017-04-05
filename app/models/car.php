@@ -26,7 +26,7 @@
 		// retrieves list of the car makes
 		public static function getMake() {
 			$db = Db::getInstance();
-			$sql = "SELECT make FROM car ";
+			$sql = "SELECT DISTINCT make FROM car ";
 			$sql .= "ORDER BY make";
 			$req = $db->prepare($sql);
 			$req->execute();
@@ -36,7 +36,7 @@
 		
 		public static function getModel() {
 			$db = Db::getInstance();
-			$sql = "SELECT model FROM car ";
+			$sql = "SELECT DISTINCT model FROM car ";
 			$sql .= "ORDER BY model";
 			$req = $db->prepare($sql);
 			$req->execute();
@@ -47,7 +47,7 @@
 		// Get make year of car
 		public static function getYear() {
 			$db = Db::getInstance();
-			$sql = "SELECT make_year FROM car ";
+			$sql = "SELECT DISTINCT make_year FROM car ";
 			$sql .= "ORDER BY make_year";
 			$req = $db->prepare($sql);
 			$req->execute();
@@ -58,7 +58,7 @@
 		// Returns all possible daily rental fees
 		public static function getDailyRentalFee() {
 			$db = Db::getInstance();
-			$sql = "SELECT daily_rental_fee FROM car ";
+			$sql = "SELECT DISTINCT daily_rental_fee FROM car ";
 			$sql .= "ORDER BY daily_rental_fee";
 			$req = $db->prepare($sql);
 			$req->execute();
@@ -69,7 +69,7 @@
 		// Returns all possible parking addresses
 		public static function getLocation() {
 			$db = Db::getInstance();
-			$sql = "SELECT parking_address FROM car ";
+			$sql = "SELECT DISTINCT parking_address FROM car ";
 			$sql .= "ORDER BY parking_address";
 			$req = $db->prepare($sql);
 			$req->execute();

@@ -5,13 +5,17 @@
 		<!-- pick  start date -->
 		<label for="startDate" class="col-md-1 control-label">Start Date</label>
 		<div class="col-md-2">
-			<input type="date" name="startDate">
+			<input type="date" value="<?php echo date('Y-m-d'); ?>" name="startDate">
 		</div>
 
 		<!-- pick end date -->
 		<label for="endDate" class="col-md-1 control-label">End Date</label>
 		<div class="col-md-2">
-			<input type="date" name="endDate">
+			<input type="date" value="
+			<?php 
+				$tempDate = strtotime(date('Y-m-d') . " +2 days");
+				echo date('Y-m-d', $tempDate);
+			?>" name="endDate">
 		</div>
 
 		<label for="make" class="col-md-1 control-label">Make</label>
@@ -87,7 +91,6 @@
 		$table = "<table class='table'>";
 		$table .= "<thead class='thead-inverse'>";
 		$table .= "<tr>";
-		$table .= "<th>VIN</th>";
 		$table .= "<th>Make</th>";
 		$table .= "<th>Model</th>";
 		$table .= "<th>Year</th>";
@@ -96,13 +99,23 @@
 		$table .= "</thead>";
 		$table .= "<tbody>";
 		foreach ($list as $row) {
-			$table .= "<tr>";
-			$table .= "<td>" . $row["vin"] . "</td>";
+			$table .= "<form id='registerform' class='form-horizontal' role='form' action='?controller=user&action=getViewReservation' method='POST'>";
+			$table .= "<tr>";			
 			$table .= "<td><a href='?controller=car&action=getViewCar&vin=" . $row["vin"] . "'>" . $row["make"] . "</td>";
 			$table .= "<td>" . $row["model"] . "</td>";
 			$table .= "<td>" . $row["make_year"] . "</td>";
-			// $table .= "<td><a href='?controller=car&action=getR" . $row["make_year"] . "</td>";
+			$table .= "<td><input type='hidden' value='" . $row["vin"] . "' name='vin'/></td>";
+			$table .= "<td><input type='hidden' value='" . $startDate . "' name='startDate'/></td>";
+			$table .= "<td><input type='hidden' value='" . $endDate . 	"' name='endDate'/></td>";
+			$date1 = new DateTime($startDate);
+			$date2 = new DateTime($endDate);
+			$interval = $date1->diff($date2);
+			$totalDays = $interval->days;
+			$table .= "<td><input type='hidden' value='" . $totalDays . "' name='totalDays'/></td>";
+
+			$table .= "<td><input type='submit' class='btn btn-info' id='btn-login'></td>";
 			$table .= "</tr>";
+			$table .= "</form>";
 		}
 		$table .= "</table>";
 		echo $table;

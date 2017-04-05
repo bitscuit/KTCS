@@ -74,7 +74,7 @@ class CarController {
 			$endDate = $_POST["endDate"];
 		} else {
 			$tempDate = strtotime($startDate . " +7 days");
-			$endDate = date('Y/m/d', $tempDate);
+			$endDate = date('Y-m-d', $tempDate);
 		}
 
 		// If the location is the blank option, make a blank query "loc" and value "locVal"

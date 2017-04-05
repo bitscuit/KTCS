@@ -14,6 +14,7 @@
 			break;
 
 			case "user":
+				require_once("models/car.php");
 				require_once("models/comment.php");
 				require_once("models/location.php");
 				require_once("models/pick_up_drop_off.php");
@@ -58,7 +59,7 @@
 							"getViewRentalHistory",
 							"getViewUserComments", "getViewAvailableCars",
 							"getViewAllCars", "getViewLocationCars",
-							"getViewDropOff", "getViewMember"],
+							"getViewDropOff", "getViewMember", "getViewReservation"],
 						"car" => ["getViewComment", "getViewLocation",
 								"getViewAvailableCars", "getViewLocationCars",
 								"getViewRentalHistory", "getViewCar"],
