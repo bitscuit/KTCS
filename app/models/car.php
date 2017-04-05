@@ -64,6 +64,20 @@
 			return $list;
 		}
 
+		public static function getAvailableLocationCars($location) {
+			$db = Db::getInstance();
+			$sql = "SELECT car.vin, make, model, make_year, daily_rental_fee,
+					parking_address, reservation_num, member_num, reservation_start_date,
+					reservation_end_date, access_code
+			 		FROM car LEFT JOIN reservation ON car.vin = reservation.vin
+					WHERE parking_address = :parking_address";
+			$req = $db->prepare($sql);
+			$req->bindParam(":parking_address", $location);
+			$req->execute();
+			$list = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $list;
+		}
+
 		public static function selectInfo($vin) {
 			$list = [];
 			$db = Db::getInstance();

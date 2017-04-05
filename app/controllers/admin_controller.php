@@ -54,5 +54,16 @@ class AdminController {
         }
         require_once("views/admin/maintenance.php");
     }
+
+    public function getViewAvailableLocationCars() {
+        $location = Location::all();
+        if (isset($_POST["parking_address"])) {
+            $result = Car::getAvailableLocationCars($_POST["parking_address"][0]);
+            if (!$result) {
+                echo "No available cars";
+            }
+        }
+        require_once("views/admin/available_cars.php");
+    }
 }
 ?>
