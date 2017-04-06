@@ -24,7 +24,7 @@ class RentalHistory {
 
 	public static function selectDamaged() {
 		$db = Db::getInstance();
-		$sql = "SELECT * FROM rental_history WHERE status = 'Damaged' OR status = 'Damaged'";
+		$sql = "SELECT * FROM rental_history WHERE status = 'Damaged' OR status = 'Not Running'";
 		$req = $db->prepare($sql);
         $req->execute();
 		$damaged = $req->fetchAll(PDO::FETCH_ASSOC);

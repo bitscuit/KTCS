@@ -25,12 +25,12 @@
 							<input type="submit" class="btn btn-info btn-block" id="btn-login">
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="col-md-12 control">
 							<div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
 								Don't have an account?
-								<a href="?controller=register&action=getViewRegister">
+								<a href="?controller=user&action=getViewRegister">
 									Register Here
 								</a>
 							</div>
