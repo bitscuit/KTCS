@@ -45,6 +45,17 @@
             return $list;
         }
 
+		public static function selectVinPickUp() {
+            $list = [];
+            $db = Db::getInstance();
+            $sql = "SELECT DISTINCT vin FROM reservation";
+            $sql .= " WHERE member_num = " . $_SESSION["memberNum"];
+            $req = $db->prepare($sql);
+            $req->execute();
+            $list = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $list;
+        }
+		
         public static function selectComment($vin, $rating) {
             $list = [];
             $db = Db::getInstance();

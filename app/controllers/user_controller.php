@@ -8,7 +8,7 @@ class UserController {
 	// show the pick form and send pick up form data to database
     public function getViewPickUp() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-            $vin = Comment::selectVin();
+            $vin = Comment::selectVinPickUp();
     		if(isset($_POST["vin"])  && isset($_POST["odometer_reading"])) {
     			$vin = $_POST["vin"][0];
                 $odometer_reading = $_POST["odometer_reading"];

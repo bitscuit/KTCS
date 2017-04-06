@@ -83,7 +83,7 @@
 </form>
 
 <?php
-	echo "Start: " . $startDate . " End: " . $endDate;
+	// echo "Start: " . $startDate . " End: " . $endDate . "<br>";
 
 	if (!empty($list)) {
 		$table = "<table class='table table-bordered'>";
