@@ -29,10 +29,12 @@ CREATE TABLE IF NOT EXISTS `car` (
   CONSTRAINT `FK_car_parking_location` FOREIGN KEY (`parking_address`) REFERENCES `parking_location` (`parking_address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.car: ~2 rows (approximately)
+-- Dumping data for table 332.car: ~4 rows (approximately)
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
 INSERT INTO `car` (`vin`, `parking_address`, `make`, `model`, `make_year`, `daily_rental_fee`) VALUES
 	('123gh45rt7y6534rw', '67 Albert St', 'Chevy', 'Cruise', '2016', 105.00),
+	('32498fb', '20 Division St', 'chevy', 'blue', '1997', 198.92),
+	('435grgwg', '20 Division St', 'chevy', 'blue', '1996', 106.57),
 	('736hfyst618hye76t', '20 Division St', 'Ferrari', 'Spider', '1996', 600.99);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 
@@ -63,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `rating` enum('1','2','3','4') NOT NULL,
   `comment_text` varchar(100) NOT NULL,
   `comment_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `reply` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`member_num`,`vin`,`comment_time`),
   KEY `FK_comment_car` (`vin`),
   KEY `FK_comment_member` (`member_num`),
@@ -70,11 +73,21 @@ CREATE TABLE IF NOT EXISTS `comment` (
   CONSTRAINT `FK_comment_member` FOREIGN KEY (`member_num`) REFERENCES `member` (`member_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.comment: ~2 rows (approximately)
+-- Dumping data for table 332.comment: ~12 rows (approximately)
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` (`member_num`, `vin`, `rating`, `comment_text`, `comment_time`) VALUES
-	(123456, '123gh45rt7y6534rw', '3', 'Had a great time!', '2017-03-02 00:13:57'),
-	(654321, '736hfyst618hye76t', '4', 'Great ride!', '2017-03-02 00:13:18');
+INSERT INTO `comment` (`member_num`, `vin`, `rating`, `comment_text`, `comment_time`, `reply`) VALUES
+	(123456, '123gh45rt7y6534rw', '3', 'Had a great time!', '2017-04-05 22:36:37', 'YOOOOO'),
+	(654321, '736hfyst618hye76t', '4', 'Great ride!', '2017-04-05 22:37:37', 'I know!'),
+	(654322, '736hfyst618hye76t', '4', 'Great!', '2017-03-29 23:42:27', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'Great!', '2017-03-29 23:43:41', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'Great car', '2017-04-05 14:13:15', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'Great car', '2017-04-05 14:13:21', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'Awesome', '2017-04-05 14:13:42', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'Awesome', '2017-04-05 14:13:51', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'yoo', '2017-04-05 20:48:26', NULL),
+	(654323, '123gh45rt7y6534rw', '4', 'hi', '2017-04-05 22:42:16', 'hello'),
+	(654323, '736hfyst618hye76t', '2', 'w', '2017-03-30 21:39:19', NULL),
+	(654323, '736hfyst618hye76t', '1', 'ww', '2017-03-30 21:39:49', NULL);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 
 -- Dumping structure for table 332.member
@@ -121,11 +134,12 @@ CREATE TABLE IF NOT EXISTS `rental_history` (
   `vin` varchar(20) NOT NULL,
   `member_num` int(20) NOT NULL,
   `pick_up_odometer_reading` int(20) NOT NULL,
-  `drop_off_odometer_reading` int(20) NOT NULL,
-  `status` enum('Normal','Damaged','Not Running') NOT NULL,
+  `drop_off_odometer_reading` int(20) DEFAULT NULL,
+  `status` enum('Normal','Damaged','Not Running') DEFAULT NULL,
   `rent_date` date NOT NULL,
+  `rent_fee` decimal(15,2) DEFAULT NULL,
   `pick_up_time` time NOT NULL,
-  `drop_off_time` time NOT NULL,
+  `drop_off_time` time DEFAULT NULL,
   PRIMARY KEY (`rent_date`,`vin`,`member_num`),
   KEY `FK_member_rental_history_member` (`member_num`),
   KEY `FK_rental_history_car` (`vin`),
@@ -133,12 +147,15 @@ CREATE TABLE IF NOT EXISTS `rental_history` (
   CONSTRAINT `FK_rental_history_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.rental_history: ~3 rows (approximately)
+-- Dumping data for table 332.rental_history: ~6 rows (approximately)
 /*!40000 ALTER TABLE `rental_history` DISABLE KEYS */;
-INSERT INTO `rental_history` (`vin`, `member_num`, `pick_up_odometer_reading`, `drop_off_odometer_reading`, `status`, `rent_date`, `pick_up_time`, `drop_off_time`) VALUES
-	('123gh45rt7y6534rw', 123456, 34576, 37645, 'Normal', '2017-03-02', '00:00:00', '13:12:13'),
-	('736hfyst618hye76t', 654321, 3245, 7654, 'Normal', '2017-03-02', '08:56:17', '12:34:19'),
-	('736hfyst618hye76t', 654322, 8888, 8888, 'Normal', '2017-03-29', '22:22:29', '22:22:29');
+INSERT INTO `rental_history` (`vin`, `member_num`, `pick_up_odometer_reading`, `drop_off_odometer_reading`, `status`, `rent_date`, `rent_fee`, `pick_up_time`, `drop_off_time`) VALUES
+	('32498fb', 654324, 444, 455, 'Damaged', '2016-03-04', NULL, '00:00:00', '17:43:03'),
+	('123gh45rt7y6534rw', 123456, 34576, 37645, 'Normal', '2017-03-02', NULL, '00:00:00', '13:12:13'),
+	('736hfyst618hye76t', 654321, 3245, 7654, 'Normal', '2017-03-02', NULL, '08:56:17', '12:34:19'),
+	('736hfyst618hye76t', 654322, 8888, 8888, 'Normal', '2017-03-29', NULL, '22:22:29', '22:22:29'),
+	('123gh45rt7y6534rw', 654323, 4556, 34262, 'Normal', '2017-04-01', 525.00, '23:13:22', '23:46:29'),
+	('736hfyst618hye76t', 654323, 345, 4567, 'Normal', '2017-04-01', NULL, '13:31:42', '14:18:12');
 /*!40000 ALTER TABLE `rental_history` ENABLE KEYS */;
 
 -- Dumping structure for table 332.reservation
@@ -154,13 +171,16 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   KEY `FK_reservation_member` (`member_num`),
   CONSTRAINT `FK_reservation_car` FOREIGN KEY (`vin`) REFERENCES `car` (`vin`),
   CONSTRAINT `FK_reservation_member` FOREIGN KEY (`member_num`) REFERENCES `member` (`member_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table 332.reservation: ~2 rows (approximately)
+-- Dumping data for table 332.reservation: ~5 rows (approximately)
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
 INSERT INTO `reservation` (`reservation_num`, `member_num`, `vin`, `reservation_start_date`, `access_code`, `reservation_end_date`) VALUES
-	(1, 654321, '736hfyst618hye76t', '2017-03-02', 1234, '0000-00-00'),
-	(2, 123456, '123gh45rt7y6534rw', '2017-03-02', 432176, '0000-00-00');
+	(1, 654321, '736hfyst618hye76t', '2017-03-02', 1234, '2017-03-03'),
+	(2, 123456, '123gh45rt7y6534rw', '2017-03-02', 432176, '2017-03-03'),
+	(3, 654322, '435grgwg', '2017-04-04', 3444, '2017-04-05'),
+	(4, 654323, '123gh45rt7y6534rw', '2017-04-01', 6080, '2017-04-05'),
+	(5, 654323, '435grgwg', '2017-04-06', 9119, '2017-04-07');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
