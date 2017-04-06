@@ -102,5 +102,10 @@ class AdminController {
         require_once("views/admin/home.php");
         echo "Welcome " . $_SESSION["username"] . "!";
     }
+
+    public function getViewInvoice() {
+        $cars = User::all();
+        require_once("views/admin/invoice.php");
+    }
 }
 ?>

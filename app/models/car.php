@@ -197,5 +197,15 @@
 			$success = $req->execute();
 			return $success;
 		}
+
+		public static function getCarDailyRentalFee($vin) {
+			$db = Db::getInstance();
+			$sql = "SELECT daily_rental_fee FROM car WHERE vin = :vin";
+			$req = $db->prepare($sql);
+			$req->bindParam(":vin", $vin);
+			$req->execute();
+	        $list = $req->fetchAll(PDO::FETCH_ASSOC);
+	        return $list;
+		}
 	}
 ?>

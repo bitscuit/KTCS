@@ -35,9 +35,15 @@ class UserController {
                 $car_status = $_POST["car_status"][0];
                 $date = $_POST["rental_date"];
                 if (PickUpDropOff::insertDropOff($vin, $_SESSION["memberNum"], $odometer_reading, $car_status, $date)) {
-                    echo "bye";
-                    header("Location: ?controller=home&action=getViewHome");
-                    exit;
+					$dailyRentalFee = Car::getCarDailyRentalFee($vin);
+					$temp = $dailyRentalFee[0]["daily_rental_fee"];
+					if (PickUpDropOff::insertRentFee($vin, $_SESSION["memberNum"], $date, $temp)) {
+	                    header("Location: ?controller=home&action=getViewHome");
+	                    exit;
+					} else {
+						header("Location: ?controller=error&action=getViewError");
+						exit;
+					}
                 }
             }
             require_once("views/pick_up_drop_off/drop_off.php");
@@ -139,7 +145,7 @@ class UserController {
 		header("Location: ?controller=user&action=getViewMember");
 		exit;
 	}
-	
+
 	public function getViewMember() {
 		if(isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
 			$memberNum = $_SESSION["memberNum"];

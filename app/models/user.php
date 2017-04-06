@@ -75,5 +75,14 @@
 			$comments = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $comments;
 		}
+
+		public static function all() {
+			$db = Db::getInstance();
+			$sql = "SELECT member_num FROM member";
+			$req = $db->prepare($sql);
+			$req->execute();
+			$comments = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $comments;
+		}
 	} // end User class
 ?>

@@ -46,5 +46,21 @@
 
 			return $member;
 		}
+
+		public static function insertRentFee($vin, $member_num, $rent_date, $dailyRentalFee) {
+			$db = Db::getInstance();
+			$sql = "UPDATE rental_history SET rent_fee = DATEDIFF(CURDATE(), :rent_date) * :daily_rental_fee
+				WHERE vin = :vin AND member_num = :member_num AND rent_date = :rent_date";
+			$req = $db->prepare($sql);
+			$rent_date = new DateTime($rent_date);
+			$req->bindParam(":rent_date", $rent_date->format('Y-m-d'));
+			$req->bindParam(":vin", $vin);
+			$req->bindParam(":member_num", $member_num);
+			$req->bindParam(":daily_rental_fee", $dailyRentalFee);
+			$req->bindParam(":status", $status);
+			$member = $req->execute();
+
+			return $member;
+		}
 	} // end PickUp class
 ?>
