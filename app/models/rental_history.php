@@ -51,7 +51,7 @@ class RentalHistory {
     public static function selectHistory() {
         $list = [];
         $db = Db::getInstance();
-		$sql = "SELECT vin, rent_date, pick_up_odometer_reading, drop_off_odometer_reading, pick_up_time, drop_off_time, status FROM rental_history";
+		$sql = "SELECT * FROM rental_history";
         $sql .= ' WHERE member_num = :member_num';
         $req = $db->prepare($sql);
         $req->bindParam(':member_num', $_SESSION["memberNum"]);

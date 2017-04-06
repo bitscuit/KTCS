@@ -10,6 +10,7 @@
 		$table .= "<th>Status</th>";
 		$table .= "<th>Pick Up Time</th>";
 		$table .= "<th>Drop Off Time</th>";
+		$table .= "<th>Rental Fee</th>";
 		$table .= "</tr>";
 		$table .= "</thead>";
 		$table .= "<tbody>";
@@ -23,6 +24,7 @@
 				$table .= "<td> " . $row["status"] . " </td>";
 				$table .= "<td> " . $row["pick_up_time"] . " </td>";
 				$table .= "<td> " . $row["drop_off_time"] . " </td>";
+				$table .= "<td> " . $row["rent_fee"] . " </td>";
 				$table .= "</tr>";
 		}
 		$table .= "</body>";
