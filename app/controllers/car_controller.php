@@ -171,6 +171,9 @@ class CarController {
 				$result = Comment::insertComment($_POST["rating"], $_POST["comment"], $_GET["vin"]);
 				if ($result) {
 					echo "Comment submitted!";
+					$string = "Location: ?controller=car&action=getViewCar&vin=" . $_GET["vin"];
+					header($string);
+					exit;
 				} else {
 					echo "Error";
 				}
