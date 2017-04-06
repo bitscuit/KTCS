@@ -33,7 +33,7 @@
 			$make = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $make;
 		}
-		
+
 		public static function getModel() {
 			$db = Db::getInstance();
 			$sql = "SELECT DISTINCT model FROM car ";
@@ -43,7 +43,7 @@
 			$model = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $model;
 		}
-		
+
 		// Get make year of car
 		public static function getYear() {
 			$db = Db::getInstance();
@@ -54,7 +54,7 @@
 			$year = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $year;
 		}
-		
+
 		// Returns all possible daily rental fees
 		public static function getDailyRentalFee() {
 			$db = Db::getInstance();
@@ -65,7 +65,7 @@
 			$rentalFee = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $rentalFee;
 		}
-		
+
 		// Returns all possible parking addresses
 		public static function getLocation() {
 			$db = Db::getInstance();
@@ -76,7 +76,7 @@
 			$location = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $location;
 		}
-		
+
 		// retrieves list of avaiable cars available for rental on specified date
 		// public static function getAvailableCars($startDate, $endDate, $location, $make, $model, $year, $rentalFee) {
 		public static function getAvailableCars($startDate, $endDate, $mk, $mkVal, $mdl, $mdlVal, $mkYear, $mkYearVal, $loc, $locVal) {
@@ -98,27 +98,27 @@
 			$req->bindParam(":startDate", $startDate->format('Y-m-d'));
 			$endDate = new DateTime($endDate);
 			$req->bindParam(":endDate", $endDate->format('Y-m-d'));
-			
+
 			// If the user didn't select a location
 			if ($locVal != "") {
 				$req->bindParam(":location", $locVal);
 			}
-			
+
 			// If the user didn't select a make
 			if ($mkVal != "") {
 				$req->bindParam(":make", $mkVal);
 			}
-			
+
 			// If the user didn't select a make
 			if ($mdlVal != "") {
 				$req->bindParam(":model", $mdlVal);
 			}
-			
+
 			// If the user didn't select a year
 			if ($mkYearVal != "") {
 				$req->bindParam(":year", $mkYearVal);
 			}
-			
+
 			$req->execute();
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
@@ -163,17 +163,6 @@
 			return $list;
 		}
 
-		public static function selectCarComments($vin) {
-			$list = [];
-			$db = Db::getInstance();
-			$sql = "SELECT rating, comment_text, comment_time FROM comment WHERE vin = :vin";
-			$req = $db->prepare($sql);
-			$req->bindParam(":vin", $vin);
-			$req->execute();
-			$list = $req->fetchAll(PDO::FETCH_ASSOC);
-			return $list;
-		}
-		
 		public static function selectCarCommentsWithReply($vin) {
 			$list = [];
 			$db = Db::getInstance();
@@ -184,7 +173,7 @@
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
 		}
-		
+
 		public static function selectAllCars() {
 			$list = [];
 			$db = Db::getInstance();

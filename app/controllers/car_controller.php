@@ -166,7 +166,7 @@ class CarController {
 	public function getViewCar() {
 		if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
             $carInfo = Car::selectInfo($_GET["vin"]);
-			$carComment = Car::selectCarComments($_GET["vin"]);
+			$carComment = Car::selectCarCommentsWithReply($_GET["vin"]);
 			if (isset($_POST["rating"]) && isset($_POST["comment"])) {
 				$result = Comment::insertComment($_POST["rating"], $_POST["comment"], $_GET["vin"]);
 				if ($result) {

@@ -61,6 +61,7 @@
     echo "<th>Rating</th>";
     echo "<th>Comment</th>";
     echo "<th>Time</th>";
+	echo "<th>Response</th>";
     echo "</tr>";
 	echo "</thead>";
 	echo "</tbody>";
@@ -70,6 +71,7 @@
 			echo "<td>" . $row['rating'] . "</td>";
 			echo "<td>" . $row['comment_text'] . "</td>";
 			echo "<td>" . $row['comment_time'] . "</td>";
+			echo "<td>" . $row['reply'] . "</td>";
 			echo "</tr>";
 		}
 		echo "</body>";
