@@ -1,6 +1,6 @@
 <div class="container">
 	<?php
-		$table = "<table>";
+		$table = "<table class='table table-bordered'>";
 		$table .= "<thead class='thead-inverse'>";
 		$table .= "<tr>";
 		$table .= "<th>Vin</th>";

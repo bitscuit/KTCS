@@ -134,6 +134,12 @@ class UserController {
         exit;
     }
 
+	public function confirmReservation() {
+		Reservation::insertReservation($_POST["vin"], $_POST["startDate"], $_POST["endDate"]);
+		header("Location: ?controller=user&action=getViewMember");
+		exit;
+	}
+	
 	public function getViewMember() {
 		if(isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
 			$memberNum = $_SESSION["memberNum"];

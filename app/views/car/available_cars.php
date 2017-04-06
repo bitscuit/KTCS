@@ -11,11 +11,7 @@
 		<!-- pick end date -->
 		<label for="endDate" class="col-md-1 control-label">End Date</label>
 		<div class="col-md-2">
-			<input type="date" value="
-			<?php 
-				$tempDate = strtotime(date('Y-m-d') . " +2 days");
-				echo date('Y-m-d', $tempDate);
-			?>" name="endDate">
+			<input type="date" value="<?php echo $endDate; ?>" name="endDate">
 		</div>
 
 		<label for="make" class="col-md-1 control-label">Make</label>
@@ -87,36 +83,40 @@
 </form>
 
 <?php
+	echo "Start: " . $startDate . " End: " . $endDate;
+
 	if (!empty($list)) {
-		$table = "<table class='table'>";
+		$table = "<table class='table table-bordered'>";
 		$table .= "<thead class='thead-inverse'>";
 		$table .= "<tr>";
 		$table .= "<th>Make</th>";
 		$table .= "<th>Model</th>";
 		$table .= "<th>Year</th>";
-		// $table .= "<th></th>";
+		$table .= "<th>Reserve</th>";
 		$table .= "</tr>";
 		$table .= "</thead>";
 		$table .= "<tbody>";
+		
+		// Hidden inputs used for POST request
 		foreach ($list as $row) {
 			$table .= "<form id='registerform' class='form-horizontal' role='form' action='?controller=user&action=getViewReservation' method='POST'>";
 			$table .= "<tr>";			
 			$table .= "<td><a href='?controller=car&action=getViewCar&vin=" . $row["vin"] . "'>" . $row["make"] . "</td>";
 			$table .= "<td>" . $row["model"] . "</td>";
 			$table .= "<td>" . $row["make_year"] . "</td>";
-			$table .= "<td><input type='hidden' value='" . $row["vin"] . "' name='vin'/></td>";
-			$table .= "<td><input type='hidden' value='" . $startDate . "' name='startDate'/></td>";
-			$table .= "<td><input type='hidden' value='" . $endDate . 	"' name='endDate'/></td>";
+			$table .= "<input type='hidden' value='" . $row["vin"] . "' name='vin'/>";
+			$table .= "<input type='hidden' value='" . $startDate . "' name='startDate'/>";
+			$table .= "<input type='hidden' value='" . $endDate . 	"' name='endDate'/>";
 			$date1 = new DateTime($startDate);
 			$date2 = new DateTime($endDate);
 			$interval = $date1->diff($date2);
 			$totalDays = $interval->days;
-			$table .= "<td><input type='hidden' value='" . $totalDays . "' name='totalDays'/></td>";
-
+			$table .= "<input type='hidden' value='" . $totalDays . "' name='totalDays'/>";
 			$table .= "<td><input type='submit' class='btn btn-info' id='btn-login'></td>";
 			$table .= "</tr>";
 			$table .= "</form>";
 		}
+		$table .= "</tbody>";
 		$table .= "</table>";
 		echo $table;
 	} else {

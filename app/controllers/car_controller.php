@@ -73,7 +73,7 @@ class CarController {
 		if (isset($_POST["endDate"])) {
 			$endDate = $_POST["endDate"];
 		} else {
-			$tempDate = strtotime($startDate . " +7 days");
+			$tempDate = strtotime($startDate . " +1 days");
 			$endDate = date('Y-m-d', $tempDate);
 		}
 

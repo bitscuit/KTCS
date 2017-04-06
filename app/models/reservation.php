@@ -17,7 +17,7 @@
 			$this->end_date 		= $end_date;
 		}
 
-		public static function insertReservation($vin, $start_date, $access_code, $end_date) {
+		public static function insertReservation($vin, $start_date, $end_date) {
 			$list = [];
 			$db = Db::getInstance();
 			$sql = 	"INSERT INTO reservation";
@@ -27,10 +27,10 @@
 			$req->bindParam(":member_num", 	$_SESSION["memberNum"]);
 			$req->bindParam(":vin", 		$vin);
 			$req->bindParam(":start_date", 	$start_date);
+			$access_code = rand(1000,9999);
 			$req->bindParam(":access_code", $access_code);
 			$req->bindParam(":end_date", 	$end_date);
 			$req->execute();
-			$member = $req->fetch();
 		} // end insertReservation function
 
 		public static function listReservations($memberNum) {

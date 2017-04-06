@@ -1,13 +1,16 @@
-<table>
-    <tr>
-        <th>Vin</th>
-        <th>Rating</th>
-        <th>Comment</th>
-        <th>Time</th>
-    </tr>
-    <?php
+<?php
     if (!empty($comments)) {
-        foreach ($comments as $row) {
+        echo "<table class='table table-bordered'>";
+		echo "<thead class='thead-inverse'>";
+		echo "<tr>";
+        echo "<th>Vin</th>";
+        echo "<th>Rating</th>";
+        echo "<th>Comment</th>";
+        echo "<th>Time</th>";
+		echo "</tr>";
+		echo "</thead>";
+		echo "<tbody>";
+		foreach ($comments as $row) {
             echo "<tr>";
             echo "<td>" . $row["vin"] . "</td>";
             echo "<td>" . $row["rating"] . "</td>";
@@ -15,6 +18,7 @@
             echo "<td>" . $row["comment_time"] . "</td>";
             echo "</tr>";
         }
+		echo "</tbody>";
+		echo "</table>";
     }
     ?>
-</table>
