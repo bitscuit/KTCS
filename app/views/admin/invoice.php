@@ -1,7 +1,7 @@
 <?php
 	echo "<h1>Invoice</h1>";
 
-	if (!empty($info) && !empty($total)) {
+	if (!empty($info)) {
 		$table = "<table class='table table-bordered'>";
 		$table .= "<thead class='thead-inverse'>";
 		$table .= "<tr>";
@@ -27,10 +27,32 @@
         $table .= "<td></td>";
         $table .= "<td></td>";
         $table .= "<td></td>";
-        $table .= "<td>" . $total[0]["rent_total"] . "</td>";
+        $table .= "<td>" . ($total[0]["rent_total"] + 5.00) . "</td>";
         $table .= "</tr>";
 		$table .= "</tbody>";
 		$table .= "</table>";
 		echo $table;
-	}
+	} else {
+        $table = "<table class='table table-bordered'>";
+		$table .= "<thead class='thead-inverse'>";
+		$table .= "<tr>";
+		$table .= "<th>Vin</th>";
+		$table .= "<th>Start Date</th>";
+		$table .= "<th>End Data</th>";
+		$table .= "<th>Fee</th>";
+        $table .= "<th>Total</th>";
+		$table .= "</tr>";
+		$table .= "</thead>";
+		$table .= "<tbody>";
+        $table .= "<tr>";
+        $table .= "<td></td>";
+        $table .= "<td></td>";
+        $table .= "<td></td>";
+        $table .= "<td></td>";
+        $table .= "<td>" . ($total[0]["rent_total"] + 5.00) . "</td>";
+        $table .= "</tr>";
+		$table .= "</tbody>";
+		$table .= "</table>";
+		echo $table;
+    }
 ?>

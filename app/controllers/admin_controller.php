@@ -111,7 +111,9 @@ class AdminController {
     public function getViewMemberInvoice() {
         $info = RentalHistory::getInvoice($_POST["member_num"]);
         $total = RentalHistory::getInvoiceTotoal($_POST["member_num"]);
-        print_r($total);
+        if (empty($total)) {
+            $total = 0;
+        }
         require_once("views/admin/invoice.php");
     }
 }
