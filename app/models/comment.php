@@ -35,6 +35,24 @@
 			}
         }
 
+		public static function insertReply($vin, $reply, $memberNum, $time) {
+            $list = [];
+			$db = Db::getInstance();
+			$sql = "UPDATE comment SET reply = :reply WHERE vin = :vin AND member_num = :member_num AND comment_time = :time";
+			$req = $db->prepare($sql);
+			$req->bindParam(":reply", $reply);
+			$req->bindParam(":vin", $vin);
+            $req->bindParam(":member_num", $memberNum);
+            $req->bindParam(":time", $time);
+			$success = $req->execute();
+			// Checks to see that user exists. Returns true if so. False otherwise.
+			if ($success != null) {
+				return true;
+			} else {
+				return false;
+			}
+        }
+		
         public static function selectVin() {
             $list = [];
             $db = Db::getInstance();

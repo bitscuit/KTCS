@@ -46,6 +46,13 @@ class AdminController {
         $result2 = Reservation::maxMinReservations(false);
         require_once("views/admin/max_min_reservations.php");
     }
+	
+	// Reply to a member comment
+	public function getViewReplyComment() {
+        $cars = Car::selectAllCars();
+        // $result2 = Reservation::maxMinReservations(false);
+        require_once("views/admin/reservation.php");
+    }
 
     public function getViewNeedsMaintenance() {
         $result = RentalHistory::needsMaintenance();
@@ -66,6 +73,31 @@ class AdminController {
         require_once("views/admin/available_cars.php");
     }
 
+	public function getViewCar() {
+		if (isset($_SESSION["adminSignIn"]) && $_SESSION["adminSignIn"] == 1) {
+			$carComment = Car::selectCarCommentsWithReply($_GET["vin"]);
+    		require_once('views/admin/car_profile.php');
+        } else {
+            header("Location: ?controller=error&action=getViewError");
+			exit;
+        }
+	}
+	
+	public function replyToComment() {
+		echo "in replytocomment. reply: " . $_POST["reply"];
+		if ($_POST["reply"] == null || $_POST["reply"] == "") {
+			echo "in here";
+		} else {
+			echo "nah in here";
+			Comment::insertReply($_POST["vin"], $_POST["reply"], $_POST["memberNum"], $_POST["commentTime"]);			
+		}
+	}
+	
+	public function getViewAllCars() {
+		$allCars = Car::selectAllCars();
+		require_once("views/admin/reservation.php");
+	}
+	
     public function getViewAdmin() {
         require_once("views/admin/home.php");
         echo "Welcome " . $_SESSION["username"] . "!";

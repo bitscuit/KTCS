@@ -173,6 +173,27 @@
 			$list = $req->fetchAll(PDO::FETCH_ASSOC);
 			return $list;
 		}
+		
+		public static function selectCarCommentsWithReply($vin) {
+			$list = [];
+			$db = Db::getInstance();
+			$sql = "SELECT member_num, rating, comment_text, comment_time, reply FROM comment WHERE vin = :vin";
+			$req = $db->prepare($sql);
+			$req->bindParam(":vin", $vin);
+			$req->execute();
+			$list = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $list;
+		}
+		
+		public static function selectAllCars() {
+			$list = [];
+			$db = Db::getInstance();
+			$sql = "SELECT * FROM car";
+			$req = $db->prepare($sql);
+			$req->execute();
+			$list = $req->fetchAll(PDO::FETCH_ASSOC);
+			return $list;
+		}
 
 		public static function addCar($vin, $parkingAddress, $make, $model, $makeYear, $dailyRentalFee) {
 			$db = Db::getInstance();

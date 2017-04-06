@@ -27,7 +27,7 @@ class UserController {
 	// show the drop off form and send drop off form data to database
     public function getViewDropOff() {
         if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-            $vin = Comment::selectVin();
+            $vin = Comment::selectVinPickUp();
     		if(isset($_POST["vin"]) && isset($_POST["odometer_reading"]) && isset($_POST["car_status"]) && isset($_POST["rental_date"])) {
                 echo "hello";
                 $vin = $_POST["vin"][0];
