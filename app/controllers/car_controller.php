@@ -164,10 +164,10 @@ class CarController {
     }
 
 	public function getViewCar() {
-		if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
-            $carInfo = Car::selectInfo($_GET["vin"]);
-			$carComment = Car::selectCarCommentsWithReply($_GET["vin"]);
-			if (isset($_POST["rating"]) && isset($_POST["comment"])) {
+        $carInfo = Car::selectInfo($_GET["vin"]);
+		$carComment = Car::selectCarCommentsWithReply($_GET["vin"]);
+		if (isset($_POST["rating"]) && isset($_POST["comment"])) {
+			if (isset($_SESSION["signIn"]) && $_SESSION["signIn"] == 1) {
 				$result = Comment::insertComment($_POST["rating"], $_POST["comment"], $_GET["vin"]);
 				if ($result) {
 					echo "Comment submitted!";
@@ -177,12 +177,12 @@ class CarController {
 				} else {
 					echo "Error";
 				}
+			} else {
+				header("Location: ?controller=error&action=getViewError");
+				exit;
 			}
-    		require_once('views/car/car_profile.php');
-        } else {
-            header("Location: ?controller=error&action=getViewError");
-			exit;
-        }
+		}
+		require_once('views/car/car_profile.php');
 	}
 
 } // end CarController class
