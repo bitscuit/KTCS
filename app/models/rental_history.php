@@ -73,5 +73,29 @@ class RentalHistory {
 		$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
 		return $reservations;
 	}
+
+	public static function getInvoice($memberNum) {
+		$db = Db::getInstance();
+		$sql = 	"SELECT *
+				FROM rental_history
+				WHERE member_num = :member_num AND EXTRACT(MONTH FROM CURDATE()) = EXTRACT(MONTH FROM end_date)";
+		$req = $db->prepare($sql);
+		$req->bindParam(':member_num', $memberNum);
+		$req->execute();
+		$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
+		return $reservations;
+	}
+
+	public static function getInvoiceTotoal($memberNum) {
+		$db = Db::getInstance();
+		$sql = 	"SELECT SUM(rent_fee) as rent_total
+				FROM rental_history
+				WHERE member_num = :member_num AND EXTRACT(MONTH FROM CURDATE()) = EXTRACT(MONTH FROM end_date)";
+		$req = $db->prepare($sql);
+		$req->bindParam(':member_num', $memberNum);
+		$req->execute();
+		$reservations = $req->fetchAll(PDO::FETCH_ASSOC);
+		return $reservations;
+	}
 } // end User class
 ?>

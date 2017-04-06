@@ -33,7 +33,7 @@
 
 		public static function insertDropOff($vin, $member_num, $drop_off_reading, $status, $rent_date) {
 			$db = Db::getInstance();
-			$sql = "UPDATE rental_history SET drop_off_odometer_reading = :drop_off_reading, status = :status, drop_off_time = CURTIME()
+			$sql = "UPDATE rental_history SET drop_off_odometer_reading = :drop_off_reading, status = :status, drop_off_time = CURTIME(), end_date = CURDATE()
 				WHERE vin = :vin AND member_num = :member_num AND rent_date = :rent_date";
 			$req = $db->prepare($sql);
 			$rent_date = new DateTime($rent_date);
@@ -49,7 +49,7 @@
 
 		public static function insertRentFee($vin, $member_num, $rent_date, $dailyRentalFee) {
 			$db = Db::getInstance();
-			$sql = "UPDATE rental_history SET rent_fee = DATEDIFF(CURDATE(), :rent_date) * :daily_rental_fee + :daily_rental_fee
+			$sql = "UPDATE rental_history SET rent_fee = (DATEDIFF(CURDATE(), :rent_date) * :daily_rental_fee + :daily_rental_fee)
 				WHERE vin = :vin AND member_num = :member_num AND rent_date = :rent_date";
 			$req = $db->prepare($sql);
 			$rent_date = new DateTime($rent_date);
@@ -58,6 +58,20 @@
 			$req->bindParam(":member_num", $member_num);
 			$req->bindParam(":daily_rental_fee", $dailyRentalFee);
 			$req->bindParam(":status", $status);
+			$member = $req->execute();
+
+			return $member;
+		}
+
+		public static function removeReservation($memberNum, $vin, $date) {
+			$db = Db::getInstance();
+			$sql = "DELETE FROM reservation
+					WHERE member_num = :member_num AND vin = :vin AND reservation_start_date = :reservation_start_date";
+			$req = $db->prepare($sql);
+			$date = new DateTime($date);
+			$req->bindParam(":reservation_start_date", $date->format('Y-m-d'));
+			$req->bindParam(":vin", $vin);
+			$req->bindParam(":member_num", $memberNum);
 			$member = $req->execute();
 
 			return $member;

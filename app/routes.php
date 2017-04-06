@@ -68,7 +68,8 @@
 							"getViewRentalHistory", "getViewDamaged",
 							"getViewReservations", "getViewMaxMinReservations",
 							"getViewNeedsMaintenance", "getViewAvailableLocationCars",
-							"getViewReplyComment", "replyToComment", "getViewInvoice"]);
+							"getViewReplyComment", "replyToComment", "getViewAllMembers",
+							"getViewMemberInvoice"]);
 
 	// if valid controller and action, execute action in that controller
 	// otherwise redirect to error page

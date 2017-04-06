@@ -103,8 +103,15 @@ class AdminController {
         echo "Welcome " . $_SESSION["username"] . "!";
     }
 
-    public function getViewInvoice() {
+    public function getViewAllMembers() {
         $cars = User::all();
+        require_once("views/admin/members.php");
+    }
+
+    public function getViewMemberInvoice() {
+        $info = RentalHistory::getInvoice($_POST["member_num"]);
+        $total = RentalHistory::getInvoiceTotoal($_POST["member_num"]);
+        print_r($total);
         require_once("views/admin/invoice.php");
     }
 }

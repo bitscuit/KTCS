@@ -37,6 +37,7 @@ class UserController {
                 if (PickUpDropOff::insertDropOff($vin, $_SESSION["memberNum"], $odometer_reading, $car_status, $date)) {
 					$dailyRentalFee = Car::getCarDailyRentalFee($vin);
 					$temp = $dailyRentalFee[0]["daily_rental_fee"];
+					PickUpDropOff::removeReservation($_SESSION["memberNum"], $vin, $date);
 					if (PickUpDropOff::insertRentFee($vin, $_SESSION["memberNum"], $date, $temp)) {
 	                    header("Location: ?controller=home&action=getViewHome");
 	                    exit;
