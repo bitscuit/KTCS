@@ -36,22 +36,25 @@
 		</div>
 	</div>
 </div>
-<table>
-    <tr>
-        <th>Vin</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Make Year</th>
-        <th>Daily Rental Fee</th>
-        <th>Parking Location</th>
-        <th>Reservation Number</th>
-        <th>Member Number</th>
-        <th>Reservation start Date</th>
-        <th>Reservation End Date</th>
-        <th>Access Code</th>
-    </tr>
     <?php
         if (!empty($result)) {
+			echo "<table class='table table-bordered'>
+			<thead>
+			<tr>
+		        <th>Vin</th>
+		        <th>Make</th>
+		        <th>Model</th>
+		        <th>Make Year</th>
+		        <th>Daily Rental Fee</th>
+		        <th>Parking Location</th>
+		        <th>Reservation Number</th>
+		        <th>Member Number</th>
+		        <th>Reservation start Date</th>
+		        <th>Reservation End Date</th>
+		        <th>Access Code</th>
+		    </tr>
+			</thead>
+			<tbody>";
             foreach ($result as $row) {
                 echo "<tr>";
                 echo "<td>" . $row['vin'] . "</td>";
@@ -67,6 +70,8 @@
                 echo "<td>" . $row['access_code'] . "</td>";
                 echo "</tr>";
             }
+			echo "
+			</tbody>
+			</table>";
         }
     ?>
-</table>

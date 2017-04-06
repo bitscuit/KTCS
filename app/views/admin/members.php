@@ -6,6 +6,7 @@
 		$table .= "<thead class='thead-inverse'>";
 		$table .= "<tr>";
 		$table .= "<th>Member</th>";
+		$table .= "<th></th>";
 		$table .= "</tr>";
 		$table .= "</thead>";
 		$table .= "<tbody>";
